@@ -1,11 +1,11 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.dataconst.ParameterName;
+import com.epam.finalproject.comand.constant.ParameterName;
 import com.epam.finalproject.dao.impl.UserDaoImpl;
 import com.epam.finalproject.entity.User;
-import com.epam.finalproject.comand.dataconst.AttributeName;
-import com.epam.finalproject.comand.dataconst.MessageName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.DaoException;
 import com.epam.finalproject.manager.ConfigurationManager;
@@ -14,7 +14,6 @@ import com.epam.finalproject.service.UserService;
 import com.epam.finalproject.util.InputInfoValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class RegistrationCommand implements ActionCommand {
@@ -33,14 +32,13 @@ public class RegistrationCommand implements ActionCommand {
         UserDaoImpl userDao = new UserDaoImpl();
         boolean isParamValid = true;
         String page = null;
-//TODO
+
         String login = request.getParameter(PARAM_LOGIN);
         String password =  request.getParameter(PARAM_PASSWORD);
         String repeatPassword = request.getParameter(PARAM_REPEAT_PASSWORD);
         String firstName = request.getParameter(PARAM_FIRST_NAME);
         String lastName = request.getParameter(PARAM_LAST_NAME);
         String mail = request.getParameter(PARAM_MAIL);
-
         try {
             if (userDao.isUserExist(login)) {
                 request.setAttribute(AttributeName.ERROR_LOGIN_ALREADY_EXISTS, MessageManager.getProperty(MessageName.LOGIN_ALREADY_EXISTS));

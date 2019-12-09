@@ -7,7 +7,6 @@ import com.epam.finalproject.exception.DaoException;
 import com.epam.finalproject.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 public class DietDaoImpl implements DietDao {
 
     private static Logger logger = LogManager.getLogger();
-
     private final static String SQL_SELECT_ALL_DIETS = "SELECT * FROM diet";
     private final static String SQL_CREATE_DIET_ORDER = "INSERT INTO diet_order(user_login, diet_type) VALUES (?, ?)";
     private final static String SQL_SELECT_PAID_USERS = "SELECT * FROM paid_users WHERE user_login  = ?";
@@ -25,12 +23,10 @@ public class DietDaoImpl implements DietDao {
     private final static String SQL_CREATE_DIET = "INSERT INTO diet(diet_type) VALUES (?)";
     private final static String SQL_DELETE_DIETS = "DELETE FROM diet WHERE diet_type = ?";
 
-
     @Override
     public boolean deleteDiets(String[] diets) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_DELETE_DIETS);
@@ -52,7 +48,6 @@ public class DietDaoImpl implements DietDao {
     public boolean create(Diet diet) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_CREATE_DIET);
@@ -72,7 +67,6 @@ public class DietDaoImpl implements DietDao {
     public boolean updateDietOrder(String userLogin, String dietType) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -110,7 +104,6 @@ public class DietDaoImpl implements DietDao {
     public boolean deleteChosenDiet(String userLogin, String[] diet) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_DELETE_DIET_ORDER);
@@ -134,7 +127,6 @@ public class DietDaoImpl implements DietDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -146,12 +138,10 @@ public class DietDaoImpl implements DietDao {
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setString(1, userLogin);
             resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 resultSet.updateBoolean(ColumnName.ASSIGNED_DIET, true);
                 resultSet.updateRow();
             }
-
             connection.commit();
             return true;
         } catch (SQLException e) {
@@ -183,7 +173,6 @@ public class DietDaoImpl implements DietDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER_DIET);
@@ -212,7 +201,6 @@ public class DietDaoImpl implements DietDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();

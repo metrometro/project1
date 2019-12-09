@@ -1,7 +1,6 @@
 package com.epam.finalproject.service;
 
 import com.epam.finalproject.dao.DietDao;
-import com.epam.finalproject.dao.ExerciseDao;
 import com.epam.finalproject.entity.Diet;
 import com.epam.finalproject.exception.DaoException;
 import com.epam.finalproject.exception.ServiceException;
@@ -9,7 +8,6 @@ import com.epam.finalproject.factory.DaoFactory;
 import com.epam.finalproject.util.XssSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 
 public class DietService {
@@ -21,7 +19,6 @@ public class DietService {
         if (diets == null) {
             return false;
         }
-
         try {
             dietDaoImpl.deleteDiets(diets);
             return true;
@@ -33,10 +30,12 @@ public class DietService {
 
     public boolean createDiet(String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
+        if (dietType == null || dietType.isEmpty()) {
+            return false;
+        }
         Diet diet = new Diet();
         dietType = XssSecurity.protectFromXssAttack(dietType);
         diet.setDietType(dietType);
-
         try {
             dietDaoImpl.create(diet);
             return true;
@@ -48,8 +47,10 @@ public class DietService {
 
 
     public boolean deleteChosenDiet(String userLogin, String[] diet) throws ServiceException {
-
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
+        if (diet == null || userLogin == null) {
+            return false;
+        }
         try {
             dietDaoImpl.deleteChosenDiet(userLogin, diet);
             return true;
@@ -61,6 +62,9 @@ public class DietService {
 
     public boolean setDiet(String userLogin, String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
+        if (dietType == null || userLogin == null || dietType.isEmpty() || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             dietDaoImpl.createOrder(userLogin, dietType);
             return true;
@@ -72,6 +76,9 @@ public class DietService {
 
     public boolean updateOrder(String userLogin, String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
+        if (dietType == null || userLogin == null || dietType.isEmpty() || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             dietDaoImpl.updateDietOrder(userLogin, dietType);
             return true;

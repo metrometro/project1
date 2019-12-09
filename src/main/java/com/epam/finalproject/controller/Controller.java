@@ -1,10 +1,10 @@
 package com.epam.finalproject.controller;
 
-import com.epam.finalproject.comand.dataconst.ParameterName;
+import com.epam.finalproject.comand.constant.ParameterName;
 import com.epam.finalproject.comand.impl.ActionCommand;
-import com.epam.finalproject.comand.dataconst.AttributeName;
-import com.epam.finalproject.comand.dataconst.MessageName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.factory.ActionFactory;
 import com.epam.finalproject.manager.ConfigurationManager;

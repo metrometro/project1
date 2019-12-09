@@ -7,7 +7,6 @@ import com.epam.finalproject.entity.User;
 import com.epam.finalproject.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,27 +14,39 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private static Logger logger = LogManager.getLogger();
-
-    private final static String SQL_PERSONAL_TRAINER_ORDER = "INSERT INTO personal_trainer_order (trainer_login, user_login) VALUES (?, ?)";
-    private final static String SQL_SELECT_ALL_PAID_USERS = "SELECT users.first_name, users.last_name, users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer = false AND users.role = 3 AND users.status = 1";
-    private final static String SQL_SELECT_ALL_PAID_USERS_WITH_PERSONAL_TRAINER = "SELECT users.first_name, users.last_name, users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer = true AND paid_users.assigned_trainer = false";
-    private final static String SQL_SELECT_ALL_USERS_WITHOUT_EXERCISES = "SELECT users.first_name, users.last_name, users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer = false AND paid_users.assigned_exercises = false";
-    private final static String SQL_SELECT_ALL_USERS_WITHOUT_DIET = "SELECT users.first_name, users.last_name, users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer = false AND paid_users.assigned_diet = false";
+    private final static String SQL_PERSONAL_TRAINER_ORDER = "INSERT INTO personal_trainer_order " +
+            "(trainer_login, user_login) VALUES (?, ?)";
+    private final static String SQL_SELECT_ALL_PAID_USERS = "SELECT users.first_name, users.last_name, users.login FROM" +
+            " users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer =" +
+            " false AND users.role = 3 AND users.status = 1";
+    private final static String SQL_SELECT_ALL_PAID_USERS_WITH_PERSONAL_TRAINER = "SELECT users.first_name, users.last_name," +
+            " users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE " +
+            "paid_users.personal_trainer = true AND paid_users.assigned_trainer = false";
+    private final static String SQL_SELECT_ALL_USERS_WITHOUT_EXERCISES = "SELECT users.first_name, users.last_name, " +
+            "users.login FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE " +
+            "paid_users.personal_trainer = false AND paid_users.assigned_exercises = false";
+    private final static String SQL_SELECT_ALL_USERS_WITHOUT_DIET = "SELECT users.first_name, users.last_name, users.login" +
+            " FROM users LEFT JOIN paid_users ON users.login = paid_users.user_login WHERE paid_users.personal_trainer =" +
+            " false AND paid_users.assigned_diet = false";
     private final static String SQL_SELECT_ALL_USERS = "SELECT * FROM users WHERE role = 3 AND status = 1";
     private final static String SQL_SELECT_ALL_DELETED_USERS = "SELECT * FROM users WHERE role = 3 AND status = 0";
     private final static String SQL_SELECT_ALL_TRAINERS = "SELECT * FROM users WHERE role = 2 AND status = 1";
     private final static String SQL_EXIST_USER_LOGIN = "SELECT 1 FROM users WHERE login = ?";
     private final static String SQL_SELECT_USER = "SELECT * FROM users WHERE login = ?";
-    private final static String SQL_CREATE_USER = "INSERT INTO users(first_name, last_name, login, password, email, role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final static String SQL_CREATE_USER = "INSERT INTO users(first_name, last_name, login, password, email, " +
+            "role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final static String SQL_CORRECT_PASSWORD_AND_LOGIN = "SELECT * FROM users WHERE login = ?";
     private final static String SQL_SELECT_ALL_TRAINERS_USERS = "SELECT * FROM personal_trainer_order WHERE trainer_login = ?";
-    private final static String SQL_SELECT_CARD = "SELECT * FROM cards WHERE first_code = ? AND second_code = ? AND third_code = ? AND fourth_code = ? AND cvc = ?";
+    private final static String SQL_SELECT_CARD = "SELECT * FROM cards WHERE first_code = ? AND second_code = ? AND" +
+            " third_code = ? AND fourth_code = ? AND cvc = ?";
     private final static String SQL_SELECT_USER_BANK = "SELECT * FROM bank WHERE user_login = ?";
     private final static String SQL_INSERT_USER_BANK = "INSERT INTO bank (user_login, user_bank) VALUES (?, ?)";
-    private final static String SQL_INSERT_TRAINING = "INSERT INTO paid_users(user_login, number_of_workouts, personal_trainer) VALUES (?, ?, ?)";
+    private final static String SQL_INSERT_TRAINING = "INSERT INTO paid_users(user_login, number_of_workouts, personal_trainer)" +
+            " VALUES (?, ?, ?)";
     private final static String SQL_IS_USER_PAID = "SELECT * FROM paid_users WHERE user_login = ?";
     private final static String SQL_SELECT_PRICE = "SELECT * FROM price";
-    private final static String SQL_SELECT_USER_DISCOUNT = "SELECT discounter FROM discount WHERE  cash <= ((SELECT user_bank FROM bank WHERE user_login = ?) + ?)";
+    private final static String SQL_SELECT_USER_DISCOUNT = "SELECT discounter FROM discount WHERE  cash <=" +
+            " ((SELECT user_bank FROM bank WHERE user_login = ?) + ?)";
     private final static String SQL_SELECT_PAID_USERS = "SELECT * FROM paid_users WHERE user_login = ?";
     private final static String SQL_DELETE_PAID_USER = "DELETE FROM paid_users WHERE user_login = ?";
     private final static String SQL_DELETE_USER_EXERCISES_ORDER = "DELETE FROM diet_order WHERE user_login = ?";
@@ -43,14 +54,15 @@ public class UserDaoImpl implements UserDao {
     private final static String SQL_DELETE_USER_PERSONAL_TRAINER_ORDER = "DELETE FROM personal_trainer_order WHERE user_login = ?";
     private final static String SQL_CREATE_COMMENT = "INSERT INTO comments(user_login, comment) VALUES (?, ?)";
     private final static String SQL_SELECT_USER_COMMENTS = "SELECT comment FROM comments WHERE user_login = ?";
-    private final static String SQL_SELECT_USER_STATE = "SELECT paid_users.user_login, paid_users.number_of_workouts, personal_trainer_order.trainer_login FROM paid_users LEFT JOIN personal_trainer_order ON paid_users.user_login = personal_trainer_order.user_login WHERE paid_users.user_login = ?";
+    private final static String SQL_SELECT_USER_STATE = "SELECT paid_users.user_login, paid_users.number_of_workouts," +
+            " personal_trainer_order.trainer_login FROM paid_users LEFT JOIN personal_trainer_order ON " +
+            "paid_users.user_login = personal_trainer_order.user_login WHERE paid_users.user_login = ?";
 
     @Override
     public boolean makeUser(String userLogin) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER,
@@ -78,7 +90,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER,
@@ -106,7 +117,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER,
@@ -134,7 +144,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER,
@@ -163,13 +172,11 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<String> list = new ArrayList<>();
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER_STATE);
             statement.setString(1, login);
             resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 list.add(login);
                 int numberOfWorkouts = resultSet.getInt(ColumnName.NUMBER_OF_WORKOUTS);
@@ -196,7 +203,6 @@ public class UserDaoImpl implements UserDao {
         ResultSet resultSet = null;
         List<String> list = new ArrayList<>();
         String comment = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER_COMMENTS);
@@ -221,7 +227,6 @@ public class UserDaoImpl implements UserDao {
     public boolean createComment(String userLogin, String comment) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_CREATE_COMMENT);
@@ -244,11 +249,9 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         int numberOfWorkout = 0;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-
             for (int i = 0; i < users.length; i++) {
                 statement = connection.prepareStatement(SQL_SELECT_PAID_USERS,
                         ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -277,7 +280,6 @@ public class UserDaoImpl implements UserDao {
             }
             connection.commit();
             return true;
-
         } catch (SQLException e) {
             try {
                 if (connection != null) {
@@ -309,7 +311,6 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         double cash = 0;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -321,7 +322,6 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(4, cardList.get(3));
             statement.setInt(5, cardList.get(4));
             resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 cash = resultSet.getDouble(ColumnName.CASH);
                 if (cash < price) {
@@ -332,12 +332,10 @@ public class UserDaoImpl implements UserDao {
             } else {
                 return false;
             }
-
             statement = connection.prepareStatement(SQL_SELECT_USER_BANK,
                     ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             statement.setString(1, login);
             resultSet = statement.executeQuery();
-
             if (resultSet.next()) {
                 double currentBank = resultSet.getDouble(3);
                 resultSet.updateDouble(ColumnName.USER_BANK, (currentBank + price));
@@ -348,7 +346,6 @@ public class UserDaoImpl implements UserDao {
                 statement.setDouble(2, price);
                 statement.executeUpdate();
             }
-
             statement = connection.prepareStatement(SQL_INSERT_TRAINING);
             statement.setString(1, login);
             statement.setInt(2, numberOfVisits);
@@ -385,7 +382,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_IS_USER_PAID);
@@ -415,7 +411,6 @@ public class UserDaoImpl implements UserDao {
         double trainingPrice = 0;
         double personalTrainerPrice = 0;
         double sum = 0;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_PRICE);
@@ -436,7 +431,6 @@ public class UserDaoImpl implements UserDao {
                 }
                 sum *= (1 - discount / 100);
             }
-
             list.add(sum);
             list.add(discount);
             return list;
@@ -456,13 +450,11 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_ALL_TRAINERS_USERS);
             statement.setString(1, trainerLogin);
             resultSet = statement.executeQuery();
-
             while (resultSet.next()) {
                 User user = new User();
                 user.setLogin(resultSet.getString(ColumnName.USER_LOGIN));
@@ -484,7 +476,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -501,7 +492,6 @@ public class UserDaoImpl implements UserDao {
                 resultSet.updateBoolean(ColumnName.ASSIGNED_TRAINER, true);
                 resultSet.updateRow();
             }
-
             connection.commit();
             return true;
         } catch (SQLException e) {
@@ -532,17 +522,14 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_USERS);
-
             while (resultSet.next()) {
                 User user = new User();
                 user.setUserId(resultSet.getInt(ColumnName.USER_ID));
                 user.setLogin(resultSet.getString(ColumnName.LOGIN));
-                System.out.println("------------------------" + user.getLogin());
                 user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
                 user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
                 user.setLogin(resultSet.getString(ColumnName.LOGIN));
@@ -566,12 +553,10 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_PAID_USERS);
-
             while (resultSet.next()) {
                 User user = new User();
                 user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
@@ -596,7 +581,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
@@ -626,12 +610,10 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_USERS_WITHOUT_DIET);
-
             while (resultSet.next()) {
                 User user = new User();
                 user.setFirstName(resultSet.getString(ColumnName.FIRST_NAME));
@@ -656,7 +638,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
@@ -686,7 +667,6 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
@@ -719,12 +699,10 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_TRAINERS);
-
             while (resultSet.next()) {
                 User user = new User();
                 user.setUserId(resultSet.getInt(ColumnName.USER_ID));
@@ -745,13 +723,10 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-
-
     @Override
     public boolean createUser(User user) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_CREATE_USER);
@@ -779,7 +754,6 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean isUserExists = false;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_EXIST_USER_LOGIN);
@@ -805,7 +779,6 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         User user = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_CORRECT_PASSWORD_AND_LOGIN);

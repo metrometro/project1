@@ -1,9 +1,9 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.dataconst.ParameterName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.ParameterName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.ServiceException;
-import com.epam.finalproject.comand.dataconst.AttributeName;
+import com.epam.finalproject.comand.constant.AttributeName;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.manager.ConfigurationManager;
 import com.epam.finalproject.service.UserService;
@@ -23,7 +23,6 @@ public class DeleteUserCommand implements ActionCommand {
         String userLogin = request.getParameter(PARAM_USER_LOGIN);
 
         try {
-            System.out.println("++++++++command" + userLogin);
             userService.deleteUser(userLogin);
         } catch (ServiceException e) {
             logger.error(e);
@@ -32,7 +31,6 @@ public class DeleteUserCommand implements ActionCommand {
 
         request.setAttribute(AttributeName.REDIRECT, ParameterName.REDIRECT);
         page = ConfigurationManager.getProperty(PathPage.REDIRECT_SHOW_ALL_USERS);
-        System.out.println("++++++++++++++returncommand");
         return page;
     }
 }

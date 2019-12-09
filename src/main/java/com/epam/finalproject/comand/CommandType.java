@@ -1,9 +1,10 @@
 package com.epam.finalproject.comand;
 
-import com.epam.finalproject.comand.pagebutton.*;
 import com.epam.finalproject.comand.impl.*;
-import com.epam.finalproject.comand.trainer.*;
-import com.epam.finalproject.comand.user.*;
+import com.epam.finalproject.comand.pagebutton.LoginCommand;
+import com.epam.finalproject.comand.pagebutton.RegistrationCommand;
+import com.epam.finalproject.comand.pagebutton.ResultCommand;
+import com.epam.finalproject.comand.pagebutton.UserMainCommand;
 
 public enum CommandType {
     MARK_USERS_VISIT {
@@ -13,7 +14,7 @@ public enum CommandType {
     },
     LOGIN {
         {
-            this.command = new LoginCommand();
+            this.command = new com.epam.finalproject.comand.impl.LoginCommand();
         }
     },
     LOGOUT {
@@ -23,12 +24,12 @@ public enum CommandType {
     },
     REGISTRATION_BUTTON {
         {
-            this.command = new RegistrationPathCommand();
+            this.command = new RegistrationCommand();
         }
     },
     LOGIN_BUTTON {
         {
-            this.command = new LoginPathCommand();
+            this.command = new LoginCommand();
         }
     },
     RESULT_BUTTON {
@@ -43,7 +44,7 @@ public enum CommandType {
     },
     REGISTRATION {
         {
-            this.command = new RegistrationCommand();
+            this.command = new com.epam.finalproject.comand.impl.RegistrationCommand();
         }
     },
     SHOW_ALL_EXERCISES {

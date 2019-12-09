@@ -18,9 +18,12 @@ public class ExerciseDaoImpl implements ExerciseDao {
     private final static String SQL_SELECT_ALL_EXERCISES = "SELECT * FROM exercise";
     private final static String SQL_CREATE_EXERCISE = "INSERT INTO exercise(exercise_type) VALUES (?)";
     private final static String SQL_SELECT_PAID_USERS = "SELECT * FROM paid_users WHERE user_login  = ?";
-    private final static String SQL_CREATE_EXERCISE_ORDER = "INSERT INTO exercise_order (user_login, exercise_type) VALUES (?, ?)";
-    private final static String SQL_SELECT_ALL_USER_EXERCISE = "SELECT exercise_type FROM exercise_order WHERE user_login = ?";
-    private final static String SQL_DELETE_EXERCISES_ORDER = "DELETE FROM exercise_order WHERE user_login = ? AND exercise_type = ?";
+    private final static String SQL_CREATE_EXERCISE_ORDER = "INSERT INTO exercise_order (user_login, exercise_type)" +
+            " VALUES (?, ?)";
+    private final static String SQL_SELECT_ALL_USER_EXERCISE = "SELECT exercise_type FROM exercise_order" +
+            " WHERE user_login = ?";
+    private final static String SQL_DELETE_EXERCISES_ORDER = "DELETE FROM exercise_order WHERE user_login = ?" +
+            " AND exercise_type = ?";
     private final static String SQL_DELETE_USER_EXERCISE_ORDER = "DELETE FROM exercise_order WHERE user_login = ?";
     private final static String SQL_DELETE_EXERCISES = "DELETE FROM exercise WHERE exercise_type = ?";
 
@@ -28,7 +31,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
     public boolean deleteExercise(String[] exercises) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_DELETE_EXERCISES);
@@ -50,15 +52,12 @@ public class ExerciseDaoImpl implements ExerciseDao {
     public boolean updateExerciseOrder(String userLogin, String[] exercises) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
-
             statement = connection.prepareStatement(SQL_DELETE_USER_EXERCISE_ORDER);
             statement.setString(1, userLogin);
             statement.executeUpdate();
-
             statement = connection.prepareStatement(SQL_CREATE_EXERCISE_ORDER);
             for (int i = 0; i < exercises.length; i++) {
                 statement.setString(1, userLogin);
@@ -92,7 +91,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
     public boolean deleteUserOrder(String userLogin) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_DELETE_USER_EXERCISE_ORDER);
@@ -112,7 +110,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
     public boolean deleteChosenExercises(String userLogin, String[] exercises) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_DELETE_EXERCISES_ORDER);
@@ -139,7 +136,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_ALL_USER_EXERCISE);
@@ -167,7 +163,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             connection.setAutoCommit(false);
@@ -188,7 +183,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
                 resultSet.updateBoolean(ColumnName.ASSIGNED_EXERCISES, true);
                 resultSet.updateRow();
             }
-
             connection.commit();
             return true;
         } catch (SQLException e) {
@@ -219,19 +213,16 @@ public class ExerciseDaoImpl implements ExerciseDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_EXERCISES);
-
             while (resultSet.next()) {
                 Exercise exercise = new Exercise();
                 exercise.setExerciseId(resultSet.getInt(ColumnName.EXERCISE_ID));
                 exercise.setExerciseType(resultSet.getString(ColumnName.EXERCISE_TYPE));
                 exercises.add(exercise);
             }
-
             if (currentExercises == null) {
                 return exercises;
             }
@@ -257,12 +248,10 @@ public class ExerciseDaoImpl implements ExerciseDao {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_SELECT_ALL_EXERCISES);
-
             while (resultSet.next()) {
                 Exercise exercise = new Exercise();
                 exercise.setExerciseId(resultSet.getInt(ColumnName.EXERCISE_ID));
@@ -285,7 +274,6 @@ public class ExerciseDaoImpl implements ExerciseDao {
     public boolean create(Exercise exercise) throws DaoException {
         Connection connection = null;
         PreparedStatement statement = null;
-
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_CREATE_EXERCISE);

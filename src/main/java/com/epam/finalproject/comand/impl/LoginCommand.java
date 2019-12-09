@@ -1,9 +1,9 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.dataconst.AttributeName;
-import com.epam.finalproject.comand.dataconst.MessageName;
-import com.epam.finalproject.comand.dataconst.ParameterName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.constant.ParameterName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.entity.User;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.ServiceException;
@@ -23,7 +23,6 @@ public class LoginCommand implements ActionCommand {
     private final static String PARAM_PASSWORD = "password";
     private final static String PARAM_LOCAL = "local";
 
-//TODO
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         String page = null;
@@ -31,14 +30,12 @@ public class LoginCommand implements ActionCommand {
         String pass = request.getParameter(PARAM_PASSWORD);
         String local = request.getParameter(PARAM_LOCAL);
         User user = null;
-
         try {
             user = userService.checkLoginAndPass(login, pass);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);
         }
-
         if (user != null) {
             if (!user.isStatus()) {
                 request.setAttribute(AttributeName.NOT_ACTIVE_ACCOUNT, MessageManager.getProperty(MessageName.YOUR_ACCOUNT_IS_NOT_ACTIVE));

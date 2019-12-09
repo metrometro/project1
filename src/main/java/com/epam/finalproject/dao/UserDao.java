@@ -30,5 +30,4 @@ public interface UserDao extends Dao <Integer, User>{
     boolean markUsersVisit(String[] users) throws DaoException;
     boolean createPaidOrder(List<Integer> cardList, String login, int numberOfVisits, double price, boolean personalTrainer)
             throws DaoException;
-
 }

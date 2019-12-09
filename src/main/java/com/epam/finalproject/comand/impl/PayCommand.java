@@ -1,9 +1,9 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.dataconst.AttributeName;
-import com.epam.finalproject.comand.dataconst.MessageName;
-import com.epam.finalproject.comand.dataconst.ParameterName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.constant.ParameterName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.manager.ConfigurationManager;
@@ -45,13 +45,11 @@ public class PayCommand implements ActionCommand {
         list.add(fourthCode);
         String cvcCode = request.getParameter(PARAM_CVC_CODE);
         list.add(cvcCode);
-
         if (!userService.checkCard(list)) {
             request.setAttribute(AttributeName.ERROR_CARD_DATA, MessageManager.getProperty(MessageName.INCORRECT_CARD));
             page = ConfigurationManager.getProperty(PathPage.PAYMENT_PAGE);
             return page;
         }
-
         String login = request.getParameter(PARAM_USER);
         list.add(login);
         String visits = request.getParameter(PARAM_NUMBER_OF_VISITS);
@@ -60,14 +58,12 @@ public class PayCommand implements ActionCommand {
         list.add(price);
         String personalTrainer = request.getParameter(PARAM_PERSONAL_TRAINER);
         list.add(personalTrainer);
-
         try {
             isOrderCreate = userService.createOrder(list);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);
         }
-
         if (isOrderCreate) {
             request.setAttribute(AttributeName.REDIRECT, ParameterName.REDIRECT);
             page = page = ConfigurationManager.getProperty(PathPage.REDIRECT_RESULT_BUTTON);

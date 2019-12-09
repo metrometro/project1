@@ -1,7 +1,7 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.dataconst.AttributeName;
-import com.epam.finalproject.comand.dataconst.PathPage;
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.manager.ConfigurationManager;
@@ -27,18 +27,15 @@ public class ChoosePaymentCommand implements ActionCommand {
         if (request.getParameter(PARAM_TRAINER) == null) {
             personalTrainer = false;
         }
-//        Boolean personalTrainer = new Boolean(request.getParameter(PARAM_TRAINER));
         List<Double> list = null;
         int numberOfVisits = Integer.parseInt(request.getParameter(PARAM_VISITS));
         int price = 0;
-
         try {
             list = userService.calculateOrder(login, numberOfVisits, personalTrainer);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);
         }
-
         request.setAttribute(AttributeName.USER, login);
         request.setAttribute(AttributeName.NUMBER_OF_VISITS, numberOfVisits);
         request.setAttribute(AttributeName.PERSONAL_TRAINER, personalTrainer);

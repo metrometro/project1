@@ -14,21 +14,18 @@ public class InputInfoValidator {
     public static boolean isCardCodeValid(String code) {
         Pattern pattern = Pattern.compile(REGEX_CARD_CODE);
         Matcher matcher = pattern.matcher(code);
-
         return matcher.matches();
     }
 
     public static boolean isCardCvcValid(String code) {
         Pattern pattern = Pattern.compile(REGEX_CVC_CARD_CODE);
         Matcher matcher = pattern.matcher(code);
-
         return matcher.matches();
     }
 
     public static boolean isLoginOrPasswordCorrect(String string) {
         Pattern pattern = Pattern.compile(REGEX_LOGIN_AND_PASSWORD);
         Matcher matcher = pattern.matcher(string);
-
         return matcher.matches();
     }
 
@@ -39,14 +36,12 @@ public class InputInfoValidator {
     public static boolean iskNameCorrect(String string) {
         Pattern pattern = Pattern.compile(REGEX_NAME);
         Matcher matcher = pattern.matcher(string);
-
         return matcher.matches();
     }
 
     public static boolean isEmailCorrect(String email) {
         Pattern pattern = Pattern.compile(REGEX_EMAIL);
         Matcher matcher = pattern.matcher(email);
-
         return matcher.matches();
     }
 }

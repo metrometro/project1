@@ -25,7 +25,6 @@ public class EncodingFilter implements Filter {
             request.setCharacterEncoding(code);
             response.setCharacterEncoding(code);
         }
-
         chain.doFilter(request, response);
     }
 

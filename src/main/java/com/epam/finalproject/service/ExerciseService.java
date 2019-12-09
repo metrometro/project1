@@ -16,10 +16,12 @@ public class ExerciseService {
 
     public boolean createExercise(String exerciseType) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
+        if (exerciseType == null || exerciseType.isEmpty()) {
+            return false;
+        }
         Exercise exercise = new Exercise();
         exerciseType = XssSecurity.protectFromXssAttack(exerciseType);
         exercise.setExerciseType(exerciseType);
-
         try {
             exerciseDao.create(exercise);
             return true;
@@ -46,7 +48,7 @@ public class ExerciseService {
 
     public boolean updateExercisesOrder(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
-        if (exercises == null) {
+        if (exercises == null || userLogin == null || userLogin.isEmpty()) {
             return false;
         }
         try {
@@ -60,7 +62,7 @@ public class ExerciseService {
 
     public boolean deleteChosenExercises(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
-        if (exercises == null) {
+        if (exercises == null || userLogin == null || userLogin.isEmpty() ) {
             return false;
         }
         try {
@@ -74,7 +76,9 @@ public class ExerciseService {
 
     public boolean deleteUserExerciseOrder(String userLogin) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
-
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             exerciseDao.deleteUserOrder(userLogin);
             return true;
@@ -86,7 +90,7 @@ public class ExerciseService {
 
     public boolean setExercises(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
-        if (exercises == null) {
+        if (exercises == null || userLogin == null || userLogin.isEmpty()) {
             return false;
         }
         try {

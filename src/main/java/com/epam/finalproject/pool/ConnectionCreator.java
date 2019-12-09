@@ -19,12 +19,10 @@ public class ConnectionCreator {
     }
 
     public ProxyConnection createConnection() {
-
         String driver = null;
         String pathConnection = null;
         String user = null;
         String password = null;
-
         try {
             driver = JdbcManager.getProperty(DRIVER);
             Class.forName(driver);
@@ -32,9 +30,7 @@ public class ConnectionCreator {
             logger.error(e);
             throw new RuntimeException(e);
         }
-
         Connection connection = null;
-
         try {
             pathConnection = JdbcManager.getProperty(PATH_CONNECTION);
             user = JdbcManager.getProperty(USER);

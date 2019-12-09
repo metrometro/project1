@@ -20,6 +20,9 @@ public class UserService {
 
     public boolean makeUser(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             userDao.makeUser(userLogin);
             return true;
@@ -31,6 +34,9 @@ public class UserService {
 
     public boolean makeTrainer(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             userDao.makeTRainer(userLogin);
             return true;
@@ -42,6 +48,9 @@ public class UserService {
 
     public boolean restoreUser(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             userDao.restoreUser(userLogin);
             return true;
@@ -54,7 +63,6 @@ public class UserService {
     public List<String> showCurrentUserStatus(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
         List<String> list = new ArrayList<>();
-
         try {
             list = userDao.findUserStatus(userLogin);
             return list;
@@ -62,13 +70,11 @@ public class UserService {
             logger.error(e);
             throw new ServiceException(e);
         }
-
     }
 
     public List<String> findCurrentUserComments(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
         List<String> comments = new ArrayList<>();
-
         try {
             comments = userDao.findCurrentUserComments(userLogin);
             return comments;
@@ -80,6 +86,9 @@ public class UserService {
 
     public boolean createComment(String userLogin, String comment) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty() || comment == null || comment.isEmpty()) {
+            return false;
+        }
         comment = XssSecurity.protectFromXssAttack(comment);
 
         System.out.println(comment);
@@ -97,6 +106,9 @@ public class UserService {
         if (users == null) {
             return false;
         }
+        if (users == null) {
+            return false;
+        }
         try {
             userDao.markUsersVisit(users);
             return true;
@@ -106,10 +118,13 @@ public class UserService {
         }
     }
 
-    public boolean isUserPaid(String login) throws ServiceException {
+    public boolean isUserPaid(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
-            return userDao.isUserPaid(login);
+            return userDao.isUserPaid(userLogin);
         } catch (DaoException e) {
             logger.error(e);
             throw new ServiceException(e);
@@ -118,6 +133,9 @@ public class UserService {
 
     public boolean createOrder(List<String> list) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (list == null) {
+            return false;
+        }
         List<Integer> cardList = new ArrayList<>();
         boolean isOrderCreate = false;
         int code = 0;
@@ -150,6 +168,9 @@ public class UserService {
     }
 
     public boolean checkCard(List<String> list) {
+        if (list == null) {
+            return false;
+        }
         boolean isCardValid = true;
         for (int i = 0; i < 4; i++) {
             if (!InputInfoValidator.isCardCodeValid(list.get(i))) {
@@ -177,6 +198,9 @@ public class UserService {
 
     public boolean deleteUser(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty()) {
+            return false;
+        }
         try {
             userDao.deleteUser(userLogin);
             return true;
@@ -188,6 +212,9 @@ public class UserService {
 
     public boolean becomePersonalTrainer(String trainerLogin, String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
+        if (userLogin == null || userLogin.isEmpty() || trainerLogin == null || trainerLogin.isEmpty()) {
+            return false;
+        }
         try {
             userDao.becomePersonalTrainer(trainerLogin, userLogin);
             return true;
