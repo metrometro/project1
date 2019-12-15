@@ -10,6 +10,7 @@ import com.epam.finalproject.service.DietService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ShowUserDietCommand implements ActionCommand {
@@ -23,6 +24,11 @@ public class ShowUserDietCommand implements ActionCommand {
         List<Diet> diets = null;
         String page = null;
         String userLogin = request.getParameter(PARAM_USER_LOGIN);
+        if (userLogin == null) {
+            HttpSession session = request.getSession();
+            userLogin = (String) session.getAttribute(AttributeName.USER_LOGIN);
+            session.removeAttribute(AttributeName.USER_LOGIN);
+        }
         try {
             diets = dietService.findUserDiet(userLogin);
         } catch (ServiceException e) {

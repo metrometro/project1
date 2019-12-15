@@ -46,6 +46,7 @@ public class Controller extends HttpServlet {
         if (page != null) {
             if (request.getAttribute(AttributeName.REDIRECT) != null &&
                     (request.getAttribute(AttributeName.REDIRECT)).equals(ParameterName.REDIRECT)) {
+                System.out.println("controller redir " + page);
                 response.sendRedirect(page);
             } else {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);

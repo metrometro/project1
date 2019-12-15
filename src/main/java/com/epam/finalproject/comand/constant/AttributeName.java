@@ -24,6 +24,7 @@ public class AttributeName {
     public final static String FIRST_NAME = "firstName";
     public final static String LAST_NAME = "lastName";
     public final static String MAIL = "mail";
+    public final static String USER_LOGIN = "userLogin";
     public final static String TRAINERS = "trainers";
     public final static String REDIRECT = "redirect";
     public final static String CURRENT_USER_ID = "currentUserId";

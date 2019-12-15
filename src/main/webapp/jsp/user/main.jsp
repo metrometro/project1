@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${local}" scope="session" />
+<fmt:setBundle basename="local" />
 <html>
 <head>
     <title>Login</title>
@@ -20,14 +23,14 @@ ${user}, hello! User page
         </div>
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_current_user_state'">show my status</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=write_comment'">write comment</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_current_user_comments'">show my comments</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_exercises_for_current_user'">show my exercises</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_diet_for_current_user'">show my diet</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=payment_form'">go payment</button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_current_user_state'"><fmt:message key="label.showMyStatus"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=write_comment'"><fmt:message key="label.writeAReview"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_current_user_comments'"><fmt:message key="label.showMyReviews"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_exercises_for_current_user'"><fmt:message key="label.showMyExercises"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_diet_for_current_user'"><fmt:message key="label.showMyDiet"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=payment_form'"><fmt:message key="label.proceedToPayment"/></button>
                 ${userAlreadyPaid}
-                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'">Logout</button>
+                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
             </div>
         </div>
     </div>
@@ -40,7 +43,7 @@ ${user}, hello! User page
         <div class="w3-container w3-center w3-margin-bottom w3-padding">
             <div class="w3-card-4">
                 <div class="w3-container w3-light-blue">
-                    <h2>U didnt pay</h2>
+                    <h2><fmt:message key="label.youDidntPay"/></h2>
                 </div>
             </div>
         </div>
@@ -49,20 +52,19 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>Your status</h2>
+            <h2><fmt:message key="label.yourStatus"/></h2>
         </div>
-        <h1>Login: </h1> ${userState.get(0)}
+        <h1><fmt:message key="label.login"/></h1> ${userState.get(0)}
         <br/>
-        <h1>Workouts: </h1> ${userState.get(1)}
+        <h1><fmt:message key="label.WorkOuts"/></h1> ${userState.get(1)}
         <br/>
-        <h1>Personal trainer: </h1> ${userState.get(2)}
+        <h1><fmt:message key="label.personalTrainer"/></h1> ${userState.get(2)}
     </div>
 </div>
     </c:when>
     <c:otherwise>
     </c:otherwise>
 </c:choose>
-
 
 <%--make comment--%>
 
@@ -71,7 +73,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>U cant write comment now</h2>
+            <h2><fmt:message key="label.youCantWriteReviews"/></h2>
         </div>
     </div>
 </div>
@@ -80,14 +82,14 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>Write comment</h2>
+            <h2><fmt:message key="label.writeAReview"/></h2>
         </div>
         <form name="CreateComment" method="POST" action="controller">
             <input type="hidden" name="command" value="create_comment" />
             </br>
             <textarea type="text" name="comment" class="w3-btn w3-white w3-round-large" rows="5" cols="45" ></textarea>
             <br/><br/>
-            <button type="submit" class="w3-btn w3-blue w3-round-large ">create comment</button>
+            <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.writeAReview"/></button>
         </form>
         <br/>
     </div>
@@ -104,7 +106,7 @@ ${user}, hello! User page
         <div class="w3-container w3-center w3-margin-bottom w3-padding">
             <div class="w3-card-4">
                 <div class="w3-container w3-light-blue">
-                    <h2>U dont have comments</h2>
+                    <h2><fmt:message key="label.youDontHaveReviews"/></h2>
                 </div>
             </div>
         </div>
@@ -128,7 +130,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>There is no exercises</h2>
+            <h2><fmt:message key="label.thereIsNoExercises"/></h2>
         </div>
     </div>
 </div>
@@ -138,7 +140,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>Your exercises</h2>
+            <h2><fmt:message key="label.yourExercises"/></h2>
         </div>
         <ul class=\"w3-ul\">
         <c:forEach var="a" items="${exercises}">
@@ -148,11 +150,11 @@ ${user}, hello! User page
         </ul>
     <form name="deleteCurrentUserExercises" method="POST" action="controller">
         <input type="hidden" name="command" value="delete_current_user_exercises" />
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">delete all exercises</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteCurrentUserExercises"/></button>
     </form>
     <form name="chooseCurrentUserExercises" method="POST" action="controller">
         <input type="hidden" name="command" value="choose_current_user_exercises" />
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">choose another exercises</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseAnotherExercises"/></button>
     </form>
         </br>
     </div>
@@ -163,7 +165,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>List for set exercises</h2>
+            <h2><fmt:message key="label.exerciseList"/></h2>
         </div>
     <form name="setCurrentUserExercises" method="POST" action="controller">
         <input type="hidden" name="command" value="set_current_user_exercises" />
@@ -174,7 +176,7 @@ ${user}, hello! User page
             <br/>
         </c:forEach>
         </ul>
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">set current user exercises</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setCurrentUserExercises"/></button>
     </form><hr/>
     </div>
 </div>
@@ -187,7 +189,7 @@ ${user}, hello! User page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>There is no diet</h2>
+                <h2><fmt:message key="label.thereIsNoDiet"/></h2>
             </div>
         </div>
     </div>
@@ -197,7 +199,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>All Exercises</h2>
+            <h2><fmt:message key="label.allExercises"/></h2>
         </div>
     <form name="deleteCurrentUserDiet" method="POST" action="controller">
         <input type="hidden" name="command" value="delete_current_user_diet" />
@@ -207,7 +209,7 @@ ${user}, hello! User page
         <input type="hidden" name="diet" value="${a.dietType}" />
         </c:forEach>
         </ul>
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">delete diet</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteCurrentUserDiet"/></button>
     </form>
     <form name="chooseCurrentUserDiet" method="POST" action="controller">
         <input type="hidden" name="command" value="choose_current_user_diet" />
@@ -223,7 +225,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2>Diets</h2>
+            <h2><fmt:message key="label.dietsList"/></h2>
         </div>
     <form name="setCurrentUserDiet" method="POST" action="controller">
         <input type="hidden" name="command" value="set_current_user_diet" />
@@ -235,7 +237,7 @@ ${user}, hello! User page
             <br/>
         </c:forEach>
         </ul>
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">set current user diet</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setCurrentUserDiet"/></button>
     </form><hr/>
     </div>
 </div>

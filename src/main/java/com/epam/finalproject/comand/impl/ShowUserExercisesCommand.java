@@ -10,6 +10,7 @@ import com.epam.finalproject.service.ExerciseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ShowUserExercisesCommand implements ActionCommand {
@@ -23,6 +24,11 @@ public class ShowUserExercisesCommand implements ActionCommand {
         List<Exercise> exercises = null;
         String page = null;
         String userLogin = request.getParameter(PARAM_USER_LOGIN);
+        if (userLogin == null) {
+            HttpSession session = request.getSession();
+            userLogin = (String) session.getAttribute(AttributeName.USER_LOGIN);
+            session.removeAttribute(AttributeName.USER_LOGIN);
+        }
         try {
             exercises = exerciseService.findUserExercises(userLogin);
         } catch (ServiceException e) {

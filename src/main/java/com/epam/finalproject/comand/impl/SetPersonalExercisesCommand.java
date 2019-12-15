@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class SetPersonalExercisesCommand implements ActionCommand {
 
@@ -31,10 +32,11 @@ public class SetPersonalExercisesCommand implements ActionCommand {
             logger.error(e);
             throw new CommandException(e);
         }
+
+        HttpSession session = request.getSession();
+        session.setAttribute(AttributeName.USER_LOGIN, userLogin);
         request.setAttribute(AttributeName.REDIRECT, ParameterName.REDIRECT);
-        builder.append(ConfigurationManager.getProperty(PathPage.REDIRECT_SHOW_USER_EXERCISES));
-        builder.append(userLogin);
-        page = builder.toString();
+        page = ConfigurationManager.getProperty(PathPage.REDIRECT_SHOW_USER_EXERCISES);
         return page;
     }
 }

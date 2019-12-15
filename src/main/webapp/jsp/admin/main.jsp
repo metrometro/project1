@@ -4,6 +4,7 @@
 <%@ taglib prefix="tag" uri="/WEB-INF/tags.tld"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
+
 <html>
 <head>
     <title>Login</title>
@@ -20,6 +21,7 @@
 ${sessionScope.user}, <fmt:message key="label.welcome" />
 <hr/>
 
+
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-center w3-green">
@@ -27,12 +29,12 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
         </div>
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_exercises'">Show all exercises</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_diets'">show all diets</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users'">show all users</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers'">show all trainers</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_not_active_users'">show all not active users</button>
-                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'">Logout</button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_exercises'"><fmt:message key="label.showAllExercises" /></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_diets'"><fmt:message key="label.showAllDiets" /></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users'"><fmt:message key="label.showAllUsers" /></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers'"><fmt:message key="label.showAllTrainers" /></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_not_active_users'"><fmt:message key="label.showAllNotActiveUsers" /></button>
+                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
             </div>
         </div>
     </div>
@@ -51,7 +53,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <textarea type="text" name="exercise" class="w3-btn w3-white w3-round-large" rows="2" cols="40" ></textarea>
                 </br>
                 </br>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">create exercise</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.createExercise"/></button>
                 </br>
                 </br>
             </form>
@@ -67,7 +69,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <textarea type="text" name="exercise" class="w3-btn w3-white w3-round-large" rows="2" cols="40" ></textarea>
                 </br>
                 </br>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">create exercise</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.createExercise"/></button>
                 </br>
                 </br>
             </form>
@@ -89,7 +91,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">delete exercises</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteExercises"/></button>
             </form>
             </br>
 
@@ -110,7 +112,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <textarea type="text" name="diet" class="w3-btn w3-white w3-round-large" rows="2" cols="40" ></textarea>
                 </br>
                 </br>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">create diet</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.createDiet"/></button>
                 </br>
                 </br>
             </form><hr/>
@@ -126,7 +128,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <textarea type="text" name="diet" class="w3-btn w3-white w3-round-large" rows="2" cols="40" ></textarea>
                 </br>
                 </br>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">create diet</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.createDiet"/></button>
                 </br>
                 </br>
             </form><hr/>
@@ -148,7 +150,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">delete diets</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteDiets"/></button>
             </form>
             </br>
         </div>
@@ -171,12 +173,12 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                                 <form name="deleteCurrentUser" method="POST" action="controller">
                                     <input type="hidden" name="command" value="delete_user" />
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
-                                    <button type="submit" class="w3-btn w3-blue w3-round-large">delete user</button>
+                                    <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.deleteUser"/></button>
                                 </form>
                                 <td><form name="makeTrainer" method="POST" action="controller">
                                     <input type="hidden" name="command" value="make_trainer" />
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
-                                    <button type="submit" class="w3-btn w3-blue w3-round-large">make trainer</button>
+                                    <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.makeTrainer"/></button>
                                 </form>
                             </div>
                             </br>
@@ -204,7 +206,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                             <form name="restoreUser" method="POST" action="controller">
                                 <input type="hidden" name="command" value="restore_user" />
                                 <input type="hidden" name="userLogin" value="${a.login}"/>
-                                <button type="submit" class="w3-btn w3-blue w3-round-large">restore user</button>
+                                <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.restoreUser"/></button>
                             </form>
                             </br>
                         </c:forEach>
@@ -230,7 +232,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                             <form name="restoreUser" method="POST" action="controller">
                                 <input type="hidden" name="command" value="make_user" />
                                 <input type="hidden" name="userLogin" value="${a.login}"/>
-                                <button type="submit" class="w3-btn w3-blue w3-round-large">make user</button>
+                                <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.makeUser"/></button>
                             </form>
                             </br>
                         </c:forEach>
