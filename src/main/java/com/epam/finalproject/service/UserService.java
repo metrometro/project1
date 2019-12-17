@@ -1,37 +1,116 @@
 package com.epam.finalproject.service;
 
+import com.epam.finalproject.comand.constant.AttributeName;
+import com.epam.finalproject.comand.constant.MessageName;
 import com.epam.finalproject.dao.UserDao;
 import com.epam.finalproject.dao.impl.UserDaoImpl;
 import com.epam.finalproject.entity.User;
+import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.DaoException;
 import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.factory.DaoFactory;
+import com.epam.finalproject.manager.MessageManager;
 import com.epam.finalproject.util.InputInfoValidator;
+import com.epam.finalproject.util.PasswordEncoder;
 import com.epam.finalproject.util.XssSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserService {
 
     private static Logger logger = LogManager.getLogger();
 
-    public boolean createUser(User user) throws ServiceException {
+    public boolean registration(LinkedList<String> list, List<String> attributesName, List<String> attributes, boolean isParamValid) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
-        String pass = PasswordEncoder.encode(user.getPassword());
-        user.setPassword(pass);
+        String login = list.getFirst();
+        list.removeFirst();
 
         try {
-            userDao.createUser(user);
-            return true;
+            if (userDao.isUserExist(login)) {
+                attributesName.add(AttributeName.ERROR_LOGIN_ALREADY_EXISTS);
+                attributes.add(MessageManager.getProperty(MessageName.LOGIN_ALREADY_EXISTS));
+                isParamValid = false;
+            } else {
+                if (InputInfoValidator.isLoginOrPasswordCorrect(login)) {
+                    attributesName.add(AttributeName.LOGIN);
+                    attributes.add(login);
+                } else {
+                    attributesName.add(AttributeName.ERROR_LOGIN);
+                    attributes.add(MessageManager.getProperty(MessageName.INCORRECT_LOGIN));
+                    isParamValid = false;
+                }
+            }
         } catch (DaoException e) {
             logger.error(e);
             throw new ServiceException(e);
         }
 
+        String password = list.getFirst();
+        list.removeFirst();
+
+        if (!InputInfoValidator.isLoginOrPasswordCorrect(password)) {
+            attributesName.add(AttributeName.ERROR_PASSWORD);
+            attributes.add(MessageManager.getProperty(MessageName.INCORRECT_PASSWORD));
+            isParamValid = false;
+        }
+        String repeatPassword = list.getFirst();
+        list.removeFirst();
+        if (!InputInfoValidator.isPasswordsMatch(password, repeatPassword)) {
+            attributesName.add(AttributeName.ERROR_REPEAT_PASSWORD);
+            attributes.add(MessageManager.getProperty(MessageName.INCORRECT_REPEAT_PASSWORD));
+            isParamValid = false;
+        }
+        String firstName = list.getFirst();
+        list.removeFirst();
+
+        if (InputInfoValidator.iskNameCorrect(firstName)) {
+            attributesName.add(AttributeName.FIRST_NAME);
+            attributes.add(firstName);
+        } else {
+            attributesName.add(AttributeName.ERROR_FIRST_NAME);
+            attributes.add(MessageManager.getProperty(MessageName.INCORRECT_FIRST_NAME));
+            isParamValid = false;
+        }
+        String lastName = list.getFirst();
+        list.removeFirst();
+
+        if (InputInfoValidator.iskNameCorrect(lastName)) {
+            attributesName.add(AttributeName.LAST_NAME);
+            attributes.add(lastName);
+        } else {
+            attributesName.add(AttributeName.ERROR_LAST_NAME);
+            attributes.add(MessageManager.getProperty(MessageName.INCORRECT_LAST_NAME));
+            isParamValid = false;
+        }
+        String mail = list.getFirst();
+        list.removeFirst();
+
+        if (InputInfoValidator.isEmailCorrect(mail)) {
+            attributesName.add(AttributeName.MAIL);
+            attributes.add(mail);
+        } else {
+            attributesName.add(AttributeName.ERROR_MAIL);
+            attributes.add(MessageManager.getProperty(MessageName.INCORRECT_EMAIL));
+            isParamValid = false;
+        }
+
+        if (isParamValid) {
+            User user = new User(firstName, lastName, login, password, mail);
+            createUser(user);
+        }
+
+        return isParamValid;
+
+
+
+
     }
+
+
 
     public boolean makeUser(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
@@ -333,5 +412,20 @@ public class UserService {
             throw new ServiceException(e);
         }
         return users;
+    }
+
+    private boolean createUser(User user) throws ServiceException {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        String pass = PasswordEncoder.encode(user.getPassword());
+        user.setPassword(pass);
+
+        try {
+            userDao.createUser(user);
+            return true;
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(e);
+        }
+
     }
 }
