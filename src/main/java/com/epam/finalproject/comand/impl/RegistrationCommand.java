@@ -15,6 +15,9 @@ import com.epam.finalproject.util.InputInfoValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class RegistrationCommand implements ActionCommand {
 
@@ -39,6 +42,7 @@ public class RegistrationCommand implements ActionCommand {
         String firstName = request.getParameter(PARAM_FIRST_NAME);
         String lastName = request.getParameter(PARAM_LAST_NAME);
         String mail = request.getParameter(PARAM_MAIL);
+
         try {
             if (userDao.isUserExist(login)) {
                 request.setAttribute(AttributeName.ERROR_LOGIN_ALREADY_EXISTS, MessageManager.getProperty(MessageName.LOGIN_ALREADY_EXISTS));

@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
     private final static String SQL_SELECT_USER = "SELECT * FROM users WHERE login = ?";
     private final static String SQL_CREATE_USER = "INSERT INTO users(first_name, last_name, login, password, email, " +
             "role, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final static String SQL_CORRECT_PASSWORD_AND_LOGIN = "SELECT * FROM users WHERE login = ?";
+    private final static String SQL_CORRECT_PASSWORD_AND_LOGIN = "SELECT users.user_id, users.login, users.password, role.role, users.status FROM users LEFT JOIN role ON users.role = role.role_id WHERE login = ?";//
     private final static String SQL_SELECT_ALL_TRAINERS_USERS = "SELECT * FROM personal_trainer_order WHERE trainer_login = ?";
     private final static String SQL_SELECT_CARD = "SELECT * FROM cards WHERE first_code = ? AND second_code = ? AND" +
             " third_code = ? AND fourth_code = ? AND cvc = ?";
@@ -679,7 +679,7 @@ public class UserDaoImpl implements UserDao {
                 user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
                 user.setLogin(resultSet.getString(ColumnName.LOGIN));
                 user.setEmail(resultSet.getString(ColumnName.EMAIL));
-                user.setRole(resultSet.getInt(ColumnName.ROLE));
+//                user.setRole(resultSet.getInt(ColumnName.ROLE));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -791,8 +791,9 @@ public class UserDaoImpl implements UserDao {
                     user = new User();
                     user.setUserId(resultSet.getInt(ColumnName.USER_ID));
                     user.setLogin(resultSet.getString(ColumnName.LOGIN));
-                    user.setRole(resultSet.getInt(ColumnName.ROLE));
+                    user.setRole(resultSet.getString(ColumnName.ROLE));
                     user.setStatus(resultSet.getBoolean(ColumnName.STATUS));
+                    resultSet.getBoolean(ColumnName.STATUS);
                 }
             }
         } catch (SQLException e) {

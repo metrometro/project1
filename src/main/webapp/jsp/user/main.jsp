@@ -5,13 +5,13 @@
 <fmt:setBundle basename="local" />
 <html>
 <head>
-    <title>Login</title>
+    <title>user</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
-    <h1>Super app!</h1>
+    <h1>Final project</h1>
 </div>
 <hr/>
 ${user}, hello! User page
@@ -19,7 +19,7 @@ ${user}, hello! User page
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-center w3-green">
-            <h2>menu</h2>
+            <h2><fmt:message key="label.siteMenu"/></h2>
         </div>
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
@@ -29,15 +29,22 @@ ${user}, hello! User page
                 <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_exercises_for_current_user'"><fmt:message key="label.showMyExercises"/></button>
                 <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_diet_for_current_user'"><fmt:message key="label.showMyDiet"/></button>
                 <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=payment_form'"><fmt:message key="label.proceedToPayment"/></button>
-                ${userAlreadyPaid}
                 <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
             </div>
         </div>
     </div>
 </div>
 
-<%--show my status--%>
+<div class="w3-container w3-padding">
+        <div class="w3-container w3-center">
+            <div class="w3-bar w3-padding-large w3-padding-24">
+                ${userAlreadyPaid}
+            </div>
+        </div>
+</div>
 
+
+<%--show my status--%>
 <c:choose>
     <c:when test="${userState.size() == 0}">
         <div class="w3-container w3-center w3-margin-bottom w3-padding">
@@ -67,7 +74,6 @@ ${user}, hello! User page
 </c:choose>
 
 <%--make comment--%>
-
 <c:choose>
     <c:when test="${userComment == false}">
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
@@ -199,7 +205,7 @@ ${user}, hello! User page
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2><fmt:message key="label.allExercises"/></h2>
+            <h2><fmt:message key="label.yourDiet"/></h2>
         </div>
     <form name="deleteCurrentUserDiet" method="POST" action="controller">
         <input type="hidden" name="command" value="delete_current_user_diet" />
@@ -213,7 +219,7 @@ ${user}, hello! User page
     </form>
     <form name="chooseCurrentUserDiet" method="POST" action="controller">
         <input type="hidden" name="command" value="choose_current_user_diet" />
-        <button type="submit" class="w3-btn w3-blue w3-round-large ">choose another diet</button>
+        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseAnotherDiet"/></button>
     </form>
         </br>
     </div>

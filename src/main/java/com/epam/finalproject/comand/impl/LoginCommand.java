@@ -4,6 +4,7 @@ import com.epam.finalproject.comand.constant.AttributeName;
 import com.epam.finalproject.comand.constant.MessageName;
 import com.epam.finalproject.comand.constant.ParameterName;
 import com.epam.finalproject.comand.constant.PathPage;
+import com.epam.finalproject.entity.RoleType;
 import com.epam.finalproject.entity.User;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.ServiceException;
@@ -14,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import static com.epam.finalproject.entity.RoleType.*;
 
 public class LoginCommand implements ActionCommand {
 
@@ -45,18 +47,19 @@ public class LoginCommand implements ActionCommand {
             HttpSession session = request.getSession();
             session.setAttribute(AttributeName.USER, login);
             session.setAttribute(AttributeName.STATUS, user.isStatus());
-            switch (user.getRole()) {
-                case (3):
+            RoleType roleType = valueOf(user.getRole().toUpperCase());
+            switch (roleType) {
+                case USER:
                     page = ConfigurationManager.getProperty(PathPage.USER_MAIN_PAGE);
                     session.setAttribute(AttributeName.ROLE, ParameterName.USER_ROLE);
                     session.setAttribute(AttributeName.LOCAL, local);
                     break;
-                case (2):
+                case TRAINER:
                     page = ConfigurationManager.getProperty(PathPage.TRAINER_MAIN_PAGE);
                     session.setAttribute(AttributeName.ROLE, ParameterName.TRAINER_ROLE);
                     session.setAttribute(AttributeName.LOCAL, local);
                     break;
-                case (1):
+                case ADMINISTRATOR:
                     page = ConfigurationManager.getProperty(PathPage.ADMIN_MAIN_PAGE);
                     session.setAttribute(AttributeName.ROLE, ParameterName.ADMINISTRATOR_ROLE);
                     session.setAttribute(AttributeName.LOCAL, local);

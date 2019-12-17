@@ -7,13 +7,13 @@
 
 <html>
 <head>
-    <title>Login</title>
+    <title>admin</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
-    <h1>Super app!</h1>
+    <h1>Final project</h1>
 </div>
 
 <h3>Welcome</h3>
@@ -25,7 +25,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-center w3-green">
-            <h2>menu</h2>
+            <h2><fmt:message key="label.siteMenu"/></h2>
         </div>
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
@@ -45,7 +45,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>There is no exercises</h2>
+                <h2><fmt:message key="label.thereIsNoExercises"/></h2>
             </div>
             <form name="createNewExercise" method="POST" action="controller">
                 <input type="hidden" name="command" value="create_new_exercise" />
@@ -80,7 +80,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All Exercises</h2>
+                <h2><fmt:message key="label.allExercises"/></h2>
             </div>
             <form name="deleteExercises" method="POST" action="controller">
                 <input type="hidden" name="command" value="delete_exercises" />
@@ -104,7 +104,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>There is no diets</h2>
+                <h2><fmt:message key="label.thereIsNoDiets"/></h2>
             </div>
             <form name="createNewDiet" method="POST" action="controller">
                 <input type="hidden" name="command" value="create_new_diet" />
@@ -139,7 +139,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All Diets</h2>
+                <h2><fmt:message key="label.allDiets"/></h2>
             </div>
             <form name="deleteDiets" method="POST" action="controller">
                 <input type="hidden" name="command" value="delete_diets" />
@@ -162,7 +162,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All users</h2>
+                <h2><fmt:message key="label.allUsers"/></h2>
             </div>
             <ul class=\"w3-ul\">
                 <div class="w3-container w3-center">
@@ -196,7 +196,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All deleted users</h2>
+                <h2><fmt:message key="label.allDeletedUsers"/></h2>
             </div>
             <ul class=\"w3-ul\">
                 <div class="w3-container w3-center">
@@ -222,7 +222,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All trainers</h2>
+                <h2><fmt:message key="label.allTrainers"/></h2>
             </div>
             <ul class=\"w3-ul\">
                 <div class="w3-container w3-center">

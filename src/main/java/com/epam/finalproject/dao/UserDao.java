@@ -2,9 +2,18 @@ package com.epam.finalproject.dao;
 
 import com.epam.finalproject.entity.User;
 import com.epam.finalproject.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
-public interface UserDao extends Dao <Integer, User>{
+public interface UserDao {
+
+    static Logger logger = LogManager.getLogger();
 
     User CheckLoginAndPassword(String login, String password) throws DaoException;
     List<User> findAllUsers() throws DaoException;
@@ -30,4 +39,34 @@ public interface UserDao extends Dao <Integer, User>{
     boolean markUsersVisit(String[] users) throws DaoException;
     boolean createPaidOrder(List<Integer> cardList, String login, int numberOfVisits, double price, boolean personalTrainer)
             throws DaoException;
+
+    default void close(Statement statement) {
+        try {
+            if (statement != null) {
+                statement.close();
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+    }
+
+    default void close(Connection connection) {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+    }
+
+    default void close(ResultSet resultSet) {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+    }
 }

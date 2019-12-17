@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<fmt:setLocale value="${local}" scope="session" />
+<fmt:setBundle basename="local" />
 <html>
 <head>
-    <title>Login</title>
+    <title>trainer</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body class="w3-light-grey">
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
-    <h1>Super app!</h1>
+    <h1>Final project</h1>
 </div>
 <hr/>
 ${sessionScope.user}, hello! Trainer page
@@ -17,18 +20,18 @@ ${sessionScope.user}, hello! Trainer page
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
         <div class="w3-container w3-center w3-green">
-            <h2>menu</h2>
+            <h2><fmt:message key="label.siteMenu"/></h2>
         </div>
 
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers_users'">show all my users</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_paid_users_with_personal_trainer'">show all paid users with personal trainer</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users_without_exercises'">show all users without exercises</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users_without_diet'">show all users without diet</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_paid_users'">show all paid users</button>
-                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=choose_personal_users_mark'">choose personal users mark</button>
-                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'">Logout</button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_trainers_users'"><fmt:message key="label.showAllMyUsers"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_paid_users_with_personal_trainer'"><fmt:message key="label.showAllPaidUsersWithPersonalTrainer"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users_without_exercises'"><fmt:message key="label.showAllUsersWithoutExercises"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_users_without_diet'"><fmt:message key="label.showAllUsersWithoutDiet"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=show_all_paid_users'"><fmt:message key="label.showAllPaidUsers"/></button>
+                <button class="w3-btn w3-hover-light-blue w3-round-large" onclick="location.href='controller?command=choose_personal_users_mark'"><fmt:message key="label.choosePersonalUsersMark"/></button>
+                <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='controller?command=logout'"><fmt:message key="label.logout"/></button>
             </div>
         </div>
     </div>
@@ -39,7 +42,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Mark my users</h2>
+                <h2><fmt:message key="label.markMyUsers"/></h2>
             </div>
             <form name="markPersonalUsersVisit" method="POST" action="controller">
                 <input type="hidden" name="command" value="mark_personal_users_visit" />
@@ -50,7 +53,7 @@ ${sessionScope.user}, hello! Trainer page
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">mark personal users visit</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.markMyUsersVisit"/></button>
             </form>
             </br>
         </div>
@@ -62,7 +65,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Trainer's users</h2>
+                <h2><fmt:message key="label.myUsers"/></h2>
             </div>
             <ul class=\"w3-ul\">
                 <div class="w3-container w3-center">
@@ -74,13 +77,13 @@ ${sessionScope.user}, hello! Trainer page
                             <form name="showUserExercises" method="POST" action="controller">
                                 <input type="hidden" name="command" value="show_user_exercises" />
                                 <input type="hidden" name="userLogin" value="${a.login}">
-                                <button type="submit" class="w3-btn w3-blue w3-round-large ">show exercises for this user</button>
+                                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.showExercisesForThisUser"/></button>
                             </form>
                             <%--show diet for chosen user--%>
                             <form name="showUserDiet" method="POST" action="controller">
                                 <input type="hidden" name="command" value="show_user_diet" />
                                 <input type="hidden" name="userLogin" value="${a.login}">
-                                <button type="submit" class="w3-btn w3-blue w3-round-large ">show diet for this user</button>
+                                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.showDietForThisUser"/></button>
                             </form>
                             </br>
                         </c:forEach>
@@ -96,7 +99,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>No exercises fo this user</h2>
+                <h2><fmt:message key="label.noExercisesForThisUser"/></h2>
             </div>
                 <%--choose exercises for current user--%>
             <br/>
@@ -106,7 +109,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="hidden" name="currentExercises" value="${a.exerciseType}"/>
                 </c:forEach>
                 <input type="hidden" name="userLogin" value="${currentUserLogin}"/>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">choose new exercises</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseNewExercises"/></button>
             </form>
             <br/>
         </div>
@@ -116,7 +119,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Current user exercises</h2>
+                <h2><fmt:message key="label.userExercises"/>: ${currentUserLogin}</h2>
             </div>
             <form name="deleteExercises" method="POST" action="controller">
                 <input type="hidden" name="userLogin" value="${currentUserLogin}"/>
@@ -127,7 +130,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="checkbox" name="exercises" value="${a.exerciseType}" />
                     <br/>
                     </c:forEach>
-                    <button type="submit" class="w3-btn w3-blue w3-round-large ">delete chosen exercises</button>
+                    <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteChosenExercises"/></button>
             </form><hr/>
                 <%--choose exercises for current user--%>
             <form name="chooseNewExercises" method="POST" action="controller">
@@ -136,7 +139,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="hidden" name="currentExercises" value="${a.exerciseType}"/>
                 </c:forEach>
                 <input type="hidden" name="userLogin" value="${currentUserLogin}"/>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">choose new exercises</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseNewExercises"/></button>
             </form>
             <br/>
         </div>
@@ -144,11 +147,11 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--set chosen exercises for current user--%>
-<c:if test="${allNotSameExercises.size() > 0}">
+<c:if test="${allNotSameExercises.size() >= 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Exercises</h2>
+                <h2><fmt:message key="label.exercisess"/>: ${currentUserLogin}</h2>
             </div>
             <form name="setChosenExercises" method="POST" action="controller">
                 <input type="hidden" name="command" value="set_personal_exercises" />
@@ -159,7 +162,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="checkbox" name="exercises" value="${a.exerciseType}" />
                     <br/>
                     </c:forEach>
-                    <button type="submit" class="w3-btn w3-blue w3-round-large ">set personal exercises</button>
+                    <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setPersonalExercises"/></button>
             </form>
             <br/>
             <br/>
@@ -173,14 +176,14 @@ ${sessionScope.user}, hello! Trainer page
         <div class="w3-card-4">
 
             <div class="w3-container w3-light-blue">
-                <h2>There is no diets</h2>
+                <h2><fmt:message key="label.thereIsNoDiets"/></h2>
             </div>
                 <%--choose diet for current user--%>
             <br/>
             <form name="chooseNewDiet" method="POST" action="controller">
                 <input type="hidden" name="command" value="choose_personal_diet" />
                 <input type="hidden" name="userLogin" value="${currentUserLogin}"/>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">choose new diet</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseNewDiet"/></button>
             </form>
             <br/>
         </div>
@@ -190,7 +193,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Current user diet</h2>
+                <h2><fmt:message key="label.userDiet"/>: ${currentUserLogin}</h2>
             </div>
                 <%--    delete diet for current user--%>
             <form name="deleteExercises" method="POST" action="controller">
@@ -203,7 +206,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="hidden" name="diet" value="${a.dietType}" />
                     <br/>
                     </c:forEach>
-                    <button type="submit" class="w3-btn w3-blue w3-round-large ">delete chosen exercises</button>
+                    <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.deleteChosenExercises"/></button>
             </form><hr/>
         </div>
     </div>
@@ -214,7 +217,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Set diet for user</h2>
+                <h2><fmt:message key="label.setDietForUser"/>: ${currentUserLogin}</h2>
             </div>
             <form name="selectExercises" method="POST" action="controller">
                 <input type="hidden" name="userLogin" value="${currentUserLogin}"/>
@@ -224,7 +227,7 @@ ${sessionScope.user}, hello! Trainer page
                     <input type="radio" name="diet" value="${a.dietType}" checked />
                     <br/>
                 </c:forEach>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">set personal diet</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setPersonalDiet"/></button>
             </form><hr/>
         </div>
     </div>
@@ -235,7 +238,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>User who paid personal trainer</h2>
+                <h2><fmt:message key="label.userWhoPaidPersonalTrainer"/></h2>
             </div>
             <ul class=\"w3-ul\">
                 <c:forEach var="a" items="${usersWithPersonalTrainer}">
@@ -243,7 +246,7 @@ ${sessionScope.user}, hello! Trainer page
                     <form name="becomePersonalTrainer" method="POST" action="controller">
                         <input type="hidden" name="command" value="become_personal_trainer" />
                         <input type="hidden" name="userLogin" value="${a.login}" />
-                        <button type="submit" class="w3-btn w3-blue w3-round-large ">become personal trainer</button>
+                        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.becomePersonalTrainer"/></button>
                     </form><hr/>
                 </c:forEach>
             </ul>
@@ -256,7 +259,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Mark users</h2>
+                <h2><fmt:message key="label.markUsers"/></h2>
             </div>
             <form name="markVisit" method="POST" action="controller">
                 <input type="hidden" name="command" value="mark_users_visit" />
@@ -267,7 +270,7 @@ ${sessionScope.user}, hello! Trainer page
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">mark users visit</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.markUsersVisit"/></button>
             </form>
             </br>
         </div>
@@ -279,7 +282,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Users without exercises</h2>
+                <h2><fmt:message key="label.usersWithoutExercises"/></h2>
             </div>
             <form name="chooseExercises" method="POST" action="controller">
                 <input type="hidden" name="command" value="choose_exercises" />
@@ -287,7 +290,7 @@ ${sessionScope.user}, hello! Trainer page
                     <c:forEach var="a" items="${usersWithoutExercises}">
                         ${a.login}
                         <input type="hidden" name="currentUserLogin" value="${a.login}">
-                        <button type="submit" class="w3-btn w3-blue w3-round-large ">choose exercises</button>
+                        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseExercises"/></button>
                         <br/>
                     </c:forEach>
                 </ul>
@@ -302,7 +305,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>Users without diet</h2>
+                <h2><fmt:message key="label.usersWithoutDiet"/></h2>
             </div>
             <form name="chooseDiet" method="POST" action="controller">
                 <input type="hidden" name="command" value="choose_diet" />
@@ -310,7 +313,7 @@ ${sessionScope.user}, hello! Trainer page
                     <c:forEach var="a" items="${usersWithoutDiet}">
                         ${a.login}
                         <input type="hidden" name="currentUserLogin" value="${a.login}">
-                        <button type="submit" class="w3-btn w3-blue w3-round-large ">choose diet</button>
+                        <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseDiet"/></button>
                         <br/>
                     </c:forEach>
                 </ul>
@@ -325,7 +328,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All Exercises</h2>
+                <h2><fmt:message key="label.allExercises"/></h2>
             </div>
             <form name="setExercisesForUser" method="POST" action="controller">
                 <input type="hidden" name="command" value="set_exercises_for_user" />
@@ -337,7 +340,7 @@ ${sessionScope.user}, hello! Trainer page
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">set exercises for user</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setExercisesForUser"/></button>
             </form>
             </br>
         </div>
@@ -349,7 +352,7 @@ ${sessionScope.user}, hello! Trainer page
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
             <div class="w3-container w3-light-blue">
-                <h2>All diets</h2>
+                <h2><fmt:message key="label.allDiets"/></h2>
             </div>
             <form name="setExercisesForUser" method="POST" action="controller">
                 <input type="hidden" name="command" value="set_diet_for_user" />
@@ -361,7 +364,7 @@ ${sessionScope.user}, hello! Trainer page
                         <br/>
                     </c:forEach>
                 </ul>
-                <button type="submit" class="w3-btn w3-blue w3-round-large ">set diet for user</button>
+                <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.setDietForUser"/></button>
             </form>
             </br>
         </div>

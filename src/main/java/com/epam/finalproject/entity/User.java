@@ -8,7 +8,7 @@ public class User extends Entity {
     private String login;
     private String password;
     private String email;
-    private int role;
+    private String role;
     private boolean status;
 
     public User() {
@@ -46,7 +46,7 @@ public class User extends Entity {
         this.email = email;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -78,7 +78,7 @@ public class User extends Entity {
         return email;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
