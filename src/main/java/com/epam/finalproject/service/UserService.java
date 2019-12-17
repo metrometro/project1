@@ -1,24 +1,17 @@
 package com.epam.finalproject.service;
 
-import com.epam.finalproject.comand.constant.AttributeName;
-import com.epam.finalproject.comand.constant.MessageName;
 import com.epam.finalproject.dao.UserDao;
 import com.epam.finalproject.dao.impl.UserDaoImpl;
 import com.epam.finalproject.entity.User;
-import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.DaoException;
 import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.factory.DaoFactory;
-import com.epam.finalproject.manager.MessageManager;
 import com.epam.finalproject.util.InputInfoValidator;
-import com.epam.finalproject.util.PasswordEncoder;
 import com.epam.finalproject.util.XssSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserService {
