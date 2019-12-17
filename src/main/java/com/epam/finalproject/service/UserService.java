@@ -11,6 +11,7 @@ import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.factory.DaoFactory;
 import com.epam.finalproject.manager.MessageManager;
 import com.epam.finalproject.util.InputInfoValidator;
+import com.epam.finalproject.util.PasswordEncoder;
 import com.epam.finalproject.util.XssSecurity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +24,21 @@ import java.util.List;
 public class UserService {
 
     private static Logger logger = LogManager.getLogger();
+
+    public boolean createUser(User user) throws ServiceException {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        String pass = PasswordEncoder.encode(user.getPassword());
+        user.setPassword(pass);
+
+        try {
+            userDao.createUser(user);
+            return true;
+        } catch (DaoException e) {
+            logger.error(e);
+            throw new ServiceException(e);
+        }
+
+    }
 
     public boolean makeUser(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();

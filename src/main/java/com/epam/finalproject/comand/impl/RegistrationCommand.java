@@ -8,6 +8,7 @@ import com.epam.finalproject.comand.constant.MessageName;
 import com.epam.finalproject.comand.constant.PathPage;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.DaoException;
+import com.epam.finalproject.exception.ServiceException;
 import com.epam.finalproject.manager.ConfigurationManager;
 import com.epam.finalproject.manager.MessageManager;
 import com.epam.finalproject.service.UserService;
@@ -93,10 +94,12 @@ public class RegistrationCommand implements ActionCommand {
 
         if (isParamValid) {
             try {
-                userDao.createUser(new User(firstName, lastName, login, password, mail));
+                User user = new User(firstName, lastName, login, password, mail);
+                userService.createUser(user);
                 request.setAttribute(AttributeName.REDIRECT, ParameterName.REDIRECT);
-            } catch (DaoException e) {
-                e.printStackTrace();
+            } catch (ServiceException e) {
+                logger.error(e);
+                throw new CommandException(e);
             }
             page = ConfigurationManager.getProperty(PathPage.REDIRECT_LOGIN_BUTTON);
             return page;
