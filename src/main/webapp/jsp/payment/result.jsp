@@ -18,6 +18,8 @@
         <div class="w3-container w3-center w3-green">
             <h2><fmt:message key="label.paymentWasSuccessful"/></h2>
         </div>
+    </div>
+</div>
 <form name="mainButton" method="POST" class="w3-selection w3-light-grey w3-padding" action="controller">
     <input type="hidden" name="command" value="user_main_button" />
     <button type="submit" class="w3-btn w3-green w3-round-large "><fmt:message key="label.goBack"/></button>

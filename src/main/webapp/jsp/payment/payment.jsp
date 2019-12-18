@@ -64,14 +64,14 @@
 <c:if test="${priceWithDiscount.size() == 2}">
     <div class="w3-card-4">
         <div class="w3-container w3-light-blue">
-            <h2><fmt:message key="label.visits"/></h2>${numberOfVisits}
+            <h4><fmt:message key="label.visits"/></h4>${numberOfVisits}
             <br/>
-            <h2><fmt:message key="label.price"/></h2>${priceWithDiscount.get(0)}
+            <h4><fmt:message key="label.price"/></h4>${priceWithDiscount.get(0)}
             <br/>
-            <h2><fmt:message key="label.discount"/><h2>${priceWithDiscount.get(1)}
+            <h4><fmt:message key="label.discount"/></h4>${priceWithDiscount.get(1)}
                 <br/>
                 <c:if test="${personalTrainer == true}">
-                <h2><fmt:message key="label.personalTrainerFrom"/></h2>
+                <h4><fmt:message key="label.personalTrainerFrom"/></h4>
                 </c:if>
         </div>
 

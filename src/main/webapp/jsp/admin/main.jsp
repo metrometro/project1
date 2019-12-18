@@ -184,7 +184,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome"/>
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
                                     <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.deleteUser"/></button>
                                 </form>
-                                <td><form name="makeTrainer" method="POST" action="controller">
+                                <form name="makeTrainer" method="POST" action="controller">
                                     <input type="hidden" name="command" value="make_trainer" />
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
                                     <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.makeTrainer"/></button>
