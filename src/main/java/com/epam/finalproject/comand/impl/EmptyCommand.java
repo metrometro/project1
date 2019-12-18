@@ -1,6 +1,6 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.constant.PathPage;
+import com.epam.finalproject.comand.PathPage;
 import com.epam.finalproject.manager.ConfigurationManager;
 import javax.servlet.http.HttpServletRequest;
 

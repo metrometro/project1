@@ -1,7 +1,7 @@
 package com.epam.finalproject.factory;
 
-import com.epam.finalproject.comand.constant.AttributeName;
-import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.AttributeName;
+import com.epam.finalproject.comand.MessageName;
 import com.epam.finalproject.comand.CommandType;
 import com.epam.finalproject.comand.impl.ActionCommand;
 import com.epam.finalproject.comand.impl.EmptyCommand;

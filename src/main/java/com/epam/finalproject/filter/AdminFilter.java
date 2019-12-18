@@ -1,7 +1,7 @@
 package com.epam.finalproject.filter;
 
-import com.epam.finalproject.comand.constant.AttributeName;
-import com.epam.finalproject.comand.constant.PathPage;
+import com.epam.finalproject.comand.AttributeName;
+import com.epam.finalproject.comand.PathPage;
 import com.epam.finalproject.entity.RoleType;
 import com.epam.finalproject.manager.ConfigurationManager;
 import java.io.IOException;

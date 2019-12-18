@@ -1,7 +1,7 @@
 package com.epam.finalproject.service;
 
-import com.epam.finalproject.comand.constant.AttributeName;
-import com.epam.finalproject.comand.constant.MessageName;
+import com.epam.finalproject.comand.AttributeName;
+import com.epam.finalproject.comand.MessageName;
 import com.epam.finalproject.dao.UserDao;
 import com.epam.finalproject.dao.impl.UserDaoImpl;
 import com.epam.finalproject.entity.User;

@@ -28,4 +28,29 @@ public class Diet extends Entity {
     public String getDietType() {
         return dietType;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != this.getClass()) {
+            return false;
+        }
+        Diet diet = (Diet) object;
+        if (diet.dietId == dietId && (diet.dietType != null && diet.dietType.equals(dietType))) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + dietId;
+        result = prime * result + ((dietType == null) ? 0 : dietType.hashCode());
+        result *= prime;
+        return result;
+    }
 }

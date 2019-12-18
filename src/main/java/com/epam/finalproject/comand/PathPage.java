@@ -1,4 +1,4 @@
-package com.epam.finalproject.comand.constant;
+package com.epam.finalproject.comand;
 
 public class PathPage {
 

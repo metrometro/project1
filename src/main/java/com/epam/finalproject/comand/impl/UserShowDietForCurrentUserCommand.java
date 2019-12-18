@@ -1,7 +1,7 @@
 package com.epam.finalproject.comand.impl;
 
-import com.epam.finalproject.comand.constant.AttributeName;
-import com.epam.finalproject.comand.constant.PathPage;
+import com.epam.finalproject.comand.AttributeName;
+import com.epam.finalproject.comand.PathPage;
 import com.epam.finalproject.entity.Diet;
 import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.exception.ServiceException;

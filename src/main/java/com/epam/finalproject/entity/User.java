@@ -85,4 +85,42 @@ public class User extends Entity {
     public boolean isStatus() {
         return status;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != this.getClass()) {
+            return false;
+        }
+        User user = (User) object;
+        if (user.userId == userId && (user.firstName != null && user.firstName.equals(firstName)) &&
+                (user.lastName != null && user.lastName.equals(lastName)) &&
+                (user.login != null && user.login.equals(login)) &&
+                (user.password != null && user.password.equals(password)) &&
+                (user.email != null && user.email.equals(email) &&
+                        (user.role != null && user.role.equals(role)) && user.status == status) ) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + userId;
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((login == null) ? 0 : login.hashCode());
+        result = prime * result + ((password == null) ? 0 : password.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((role == null) ? 0 : role.hashCode());
+        if (status == true) {
+            result += 1;
+            result *= prime;
+        }
+        return result;
+    }
 }
