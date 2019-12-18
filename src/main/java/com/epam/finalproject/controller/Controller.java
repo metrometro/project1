@@ -9,6 +9,7 @@ import com.epam.finalproject.exception.CommandException;
 import com.epam.finalproject.factory.ActionFactory;
 import com.epam.finalproject.manager.ConfigurationManager;
 import com.epam.finalproject.manager.MessageManager;
+import com.epam.finalproject.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javax.servlet.RequestDispatcher;
@@ -24,10 +25,12 @@ public class Controller extends HttpServlet {
 
     private static Logger logger = LogManager.getLogger();
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -56,5 +59,10 @@ public class Controller extends HttpServlet {
             request.getSession().setAttribute(AttributeName.NULL_PAGE, MessageManager.getProperty(MessageName.NULL_PAGE));
             response.sendRedirect(request.getContextPath() + page);
         }
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool.getInstance().destroyPool();
     }
 }

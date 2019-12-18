@@ -4,7 +4,6 @@ import com.epam.finalproject.entity.Diet;
 import com.epam.finalproject.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
