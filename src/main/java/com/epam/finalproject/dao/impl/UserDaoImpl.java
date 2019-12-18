@@ -203,15 +203,15 @@ public class UserDaoImpl implements UserDao {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<String> list = new ArrayList<>();
-        String comment = null;
+        String review = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(SQL_SELECT_USER_COMMENTS);
             statement.setString(1, userLogin);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                comment = resultSet.getString(ColumnName.COMMENT);
-                list.add(comment);
+                review = resultSet.getString(ColumnName.COMMENT);
+                list.add(review);
             }
             return list;
         } catch (SQLException e) {
@@ -680,7 +680,6 @@ public class UserDaoImpl implements UserDao {
                 user.setLastName(resultSet.getString(ColumnName.LAST_NAME));
                 user.setLogin(resultSet.getString(ColumnName.LOGIN));
                 user.setEmail(resultSet.getString(ColumnName.EMAIL));
-//                user.setRole(resultSet.getInt(ColumnName.ROLE));
                 users.add(user);
             }
         } catch (SQLException e) {

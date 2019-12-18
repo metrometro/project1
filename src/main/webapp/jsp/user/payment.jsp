@@ -82,16 +82,16 @@
             <input type="hidden" name="personalTrainer" value="${personalTrainer}">
             <input type="hidden" name="numberOfVisits" value="${numberOfVisits}">
             <input type="hidden" name="price" value="${priceWithDiscount.get(0)}">
-            <label>First code: <input type="text" name="firstCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label>First code: <input type="text" name="firstCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[0-9]{4}"/>
                     <%--        required pattern="[0-9]{4}"--%>
             </label>
-            <label><fmt:message key="label.fourNumbers"/><input type="text" name="secondCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label><fmt:message key="label.fourNumbers"/><input type="text" name="secondCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[0-9]{4}" />
             </label>
-            <label><fmt:message key="label.fourNumbers"/><input type="text" name="thirdCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label><fmt:message key="label.fourNumbers"/><input type="text" name="thirdCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[0-9]{4}" />
             </label>
-            <label><fmt:message key="label.fourNumbers"/><input type="text" name="fourthCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label><fmt:message key="label.fourNumbers"/><input type="text" name="fourthCode" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[0-9]{4}" />
             </label>
-            <label><fmt:message key="label.cvc"/>:<input type="text" name="cvc" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label><fmt:message key="label.cvc"/>:<input type="text" name="cvc" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[0-9]{3}" />
             </label><br>
             <button type="submit" class="w3-btn w3-green w3-round-large "><fmt:message key="label.toPay"/></button>
 

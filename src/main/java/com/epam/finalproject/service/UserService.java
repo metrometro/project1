@@ -203,10 +203,10 @@ public class UserService {
 
     public List<String> findCurrentUserComments(String userLogin) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
-        List<String> comments = new ArrayList<>();
+        List<String> reviews = null;
         try {
-            comments = userDao.findCurrentUserComments(userLogin);
-            return comments;
+            reviews = userDao.findCurrentUserComments(userLogin);
+            return reviews;
         } catch (DaoException e) {
             logger.error(e);
             throw new ServiceException(e);
@@ -248,9 +248,6 @@ public class UserService {
 
     public boolean markUsersVisit(String[] users) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
-        if (users == null) {
-            return false;
-        }
         if (users == null) {
             return false;
         }

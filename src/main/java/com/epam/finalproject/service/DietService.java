@@ -69,7 +69,7 @@ public class DietService {
 
     public boolean deleteChosenDiet(String userLogin, String[] diet) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
-        if (diet == null || userLogin == null) {
+        if (diet == null || userLogin == null || userLogin.isEmpty()) {
             return false;
         }
         try {
