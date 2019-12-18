@@ -28,6 +28,7 @@ public class ExerciseService {
         }
         Exercise exercise = new Exercise();
         exerciseType = XssSecurity.protectFromXssAttack(exerciseType);
+        exerciseType = exerciseType.substring(0,50);
         exercise.setExerciseType(exerciseType);
         try {
             exerciseDao.create(exercise);

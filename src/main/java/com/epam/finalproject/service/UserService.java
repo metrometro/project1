@@ -221,13 +221,13 @@ public class UserService {
      * @exception ServiceException
      */
 
-    public boolean createComment(String userLogin, String comment) throws ServiceException {
+    public boolean createReview(String userLogin, String comment) throws ServiceException {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
         if (userLogin == null || userLogin.isEmpty() || comment == null || comment.isEmpty()) {
             return false;
         }
         comment = XssSecurity.protectFromXssAttack(comment);
-        comment = comment.substring(0, 10);
+        comment = comment.substring(0, 2000);
 
         System.out.println(comment);
         try {

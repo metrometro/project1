@@ -25,7 +25,7 @@ public class UserCreateReviewCommand implements ActionCommand {
         String comment = request.getParameter(PARAM_COMMENT);
         String page = null;
         try {
-            userService.createComment(userLogin, comment);
+            userService.createReview(userLogin, comment);
         } catch (ServiceException e) {
             logger.error(e);
             throw new CommandException(e);

@@ -49,6 +49,7 @@ public class DietService {
         }
         Diet diet = new Diet();
         dietType = XssSecurity.protectFromXssAttack(dietType);
+        dietType = dietType.substring(0, 50);
         diet.setDietType(dietType);
         try {
             dietDaoImpl.create(diet);

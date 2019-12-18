@@ -72,7 +72,7 @@ public class InputInfoValidator {
 
     /**
      * Method for validation user last name
-     * @param string - user last name
+     * @param email - user last name
      * @return boolean type
      */
 
