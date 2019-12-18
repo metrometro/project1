@@ -50,5 +50,6 @@
     <button type="submit" class="w3-btn w3-green w3-round-large ">go to login</button>
 </form><hr/>
 </div>
+
 </body>
 </html>

@@ -16,10 +16,13 @@
     <h1>Final project</h1>
 </div>
 
-<h3>Welcome</h3>
-<hr/>
-${sessionScope.user}, <fmt:message key="label.welcome"/>
-<hr/>
+<div class="w3-container w3-padding">
+    <div class="w3-container w3-center">
+        <div class="w3-bar w3-padding-large w3-padding-24">
+            ${user} <fmt:message key="label.welcome"/>
+        </div>
+    </div>
+</div>
 
 
 <div class="w3-container w3-padding">
@@ -270,5 +273,13 @@ ${sessionScope.user}, <fmt:message key="label.welcome"/>
         </div>
     </div>
 </c:if>
-<tag:date text="${local}"/><br>
+
+<div class="w3-container w3-padding">
+    <div class="w3-container w3-center">
+        <div class="w3-bar w3-padding-large w3-padding-24">
+            <footer><tag:date text="${local}"/></footer>
+        </div>
+    </div>
+</div>
+
 </body></html>

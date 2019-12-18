@@ -539,6 +539,7 @@ public class UserService {
 
     public User checkLoginAndPass(String login, String pass) throws ServiceException {
         UserDao userDao = new UserDaoImpl();
+        pass = PasswordEncoder.encode(pass);
         User user = null;
         try {
             user = userDao.CheckLoginAndPassword(login, pass);

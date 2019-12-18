@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/tags.tld"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
 <html>
@@ -13,8 +14,14 @@
 <div class="w3-container w3-blue-grey w3-opacity w3-right-align">
     <h1>Final project</h1>
 </div>
-<hr/>
-${user}, hello! User page
+
+<div class="w3-container w3-padding">
+    <div class="w3-container w3-center">
+        <div class="w3-bar w3-padding-large w3-padding-24">
+            ${user} <fmt:message key="label.welcome"/>
+        </div>
+    </div>
+</div>
 
 <div class="w3-container w3-padding">
     <div class="w3-card-4">
@@ -245,5 +252,13 @@ ${user}, hello! User page
     </div>
 </div>
 </c:if>
+
+<div class="w3-container w3-padding">
+    <div class="w3-container w3-center">
+        <div class="w3-bar w3-padding-large w3-padding-24">
+            <footer><tag:date text="${local}"/></footer>
+        </div>
+    </div>
+</div>
 
 </body></html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="tag" uri="/WEB-INF/tags.tld"%>
 <fmt:setLocale value="${local}" scope="session" />
 <fmt:setBundle basename="local" />
 
@@ -103,6 +104,14 @@
         <input type="hidden" name="command" value="user_main_button" />
         <button type="submit" class="w3-btn w3-green w3-round-large "><fmt:message key="label.goBack"/></button>
     </form><hr/>
+
+    <div class="w3-container w3-padding">
+        <div class="w3-container w3-center">
+            <div class="w3-bar w3-padding-large w3-padding-24">
+                <footer><tag:date text="${local}"/></footer>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
