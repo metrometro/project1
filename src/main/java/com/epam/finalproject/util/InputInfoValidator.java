@@ -11,11 +11,23 @@ public class InputInfoValidator {
     private final static String REGEX_CARD_CODE = "[0-9]{4}";
     private final static String REGEX_CVC_CARD_CODE = "[0-9]{3}";
 
+    /**
+     * Method for validation credit card value
+     * @param code - card code value
+     * @return boolean type
+     */
+
     public static boolean isCardCodeValid(String code) {
         Pattern pattern = Pattern.compile(REGEX_CARD_CODE);
         Matcher matcher = pattern.matcher(code);
         return matcher.matches();
     }
+
+    /**
+     * Method for validation credit card value
+     * @param code - card code value
+     * @return boolean type
+     */
 
     public static boolean isCardCvcValid(String code) {
         Pattern pattern = Pattern.compile(REGEX_CVC_CARD_CODE);
@@ -23,21 +35,46 @@ public class InputInfoValidator {
         return matcher.matches();
     }
 
+    /**
+     * Method for validation user password and login
+     * @param string - user login or password
+     * @return boolean type
+     */
+
     public static boolean isLoginOrPasswordCorrect(String string) {
         Pattern pattern = Pattern.compile(REGEX_LOGIN_AND_PASSWORD);
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
 
+    /**
+     * Method for checking repeated password
+     * @param firstPassword - user password
+     * @param secondPassword - repeat password
+     * @return boolean type
+     */
+
     public static boolean isPasswordsMatch(String firstPassword, String secondPassword) {
         return firstPassword.equals(secondPassword);
     }
+
+    /**
+     * Method for validation user name
+     * @param string - user first name
+     * @return boolean type
+     */
 
     public static boolean iskNameCorrect(String string) {
         Pattern pattern = Pattern.compile(REGEX_NAME);
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
+
+    /**
+     * Method for validation user last name
+     * @param string - user last name
+     * @return boolean type
+     */
 
     public static boolean isEmailCorrect(String email) {
         Pattern pattern = Pattern.compile(REGEX_EMAIL);

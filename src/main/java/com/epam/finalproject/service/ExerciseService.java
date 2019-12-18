@@ -14,6 +14,13 @@ public class ExerciseService {
 
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     * Method for creating execise
+     * @param exerciseType - exercises
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean createExercise(String exerciseType) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         if (exerciseType == null || exerciseType.isEmpty()) {
@@ -31,6 +38,13 @@ public class ExerciseService {
         }
     }
 
+    /**
+     * Method for deleting exercise
+     * @param exercises - exercises array
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean deleteExercises(String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         if (exercises == null) {
@@ -46,6 +60,14 @@ public class ExerciseService {
         }
     }
 
+    /**
+     * Method for updating chosen exercises
+     * @param userLogin - user login
+     * @param exercises - exercises array
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean updateExercisesOrder(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         if (exercises == null || userLogin == null || userLogin.isEmpty()) {
@@ -59,6 +81,14 @@ public class ExerciseService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Method for deleting chosen exercises
+     * @param userLogin - user login
+     * @param exercises - exercises array
+     * @return boolean type
+     * @exception ServiceException
+     */
 
     public boolean deleteChosenExercises(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
@@ -74,6 +104,13 @@ public class ExerciseService {
         }
     }
 
+    /**
+     * Method for deleting user exercise order
+     * @param userLogin - user login
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean deleteUserExerciseOrder(String userLogin) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         if (userLogin == null || userLogin.isEmpty()) {
@@ -87,6 +124,14 @@ public class ExerciseService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Method for setting exercises
+     * @param userLogin - user login
+     * @param exercises - exercises array
+     * @return boolean type
+     * @exception ServiceException
+     */
 
     public boolean setExercises(String userLogin, String[] exercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
@@ -102,6 +147,13 @@ public class ExerciseService {
         }
     }
 
+    /**
+     * Method for finding all user exercises
+     * @param userLogin - user login
+     * @return exercises
+     * @exception ServiceException
+     */
+
     public List<Exercise> findUserExercises(String userLogin) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         List<Exercise> exercises = null;
@@ -114,6 +166,13 @@ public class ExerciseService {
         return exercises;
     }
 
+    /**
+     * Method for finding all not same exercises
+     * @param currentExercises - current exercises
+     * @return exercises
+     * @exception ServiceException
+     */
+
     public List<Exercise> findAllNotSameExercises(String[] currentExercises) throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();
         List<Exercise> exercises = null;
@@ -125,6 +184,12 @@ public class ExerciseService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Method for finding all exercises
+     * @return exercises
+     * @exception ServiceException
+     */
 
     public List<Exercise> findAllExercises() throws ServiceException {
         ExerciseDao exerciseDao = DaoFactory.getInstance().getExerciseDao();

@@ -35,6 +35,7 @@ ${user}, hello! User page
     </div>
 </div>
 
+<c:if test="${userAlreadyPaid == 'You already have a subscription purchased'}">
 <div class="w3-container w3-padding">
         <div class="w3-container w3-center">
             <div class="w3-bar w3-padding-large w3-padding-24">
@@ -42,7 +43,7 @@ ${user}, hello! User page
             </div>
         </div>
 </div>
-
+</c:if>
 
 <%--show my status--%>
 <c:choose>
@@ -61,11 +62,9 @@ ${user}, hello! User page
         <div class="w3-container w3-light-blue">
             <h2><fmt:message key="label.yourStatus"/></h2>
         </div>
-        <h1><fmt:message key="label.login"/></h1> ${userState.get(0)}
-        <br/>
-        <h1><fmt:message key="label.WorkOuts"/></h1> ${userState.get(1)}
-        <br/>
-        <h1><fmt:message key="label.personalTrainer"/></h1> ${userState.get(2)}
+        <h3><fmt:message key="label.login"/> ${userState.get(0)}</h3>
+        <h3><fmt:message key="label.WorkOuts"/> ${userState.get(1)}</h3>
+        <h3><fmt:message key="label.personalTrainer"/> ${userState.get(2)}</h3>
     </div>
 </div>
     </c:when>
@@ -226,7 +225,6 @@ ${user}, hello! User page
 </div>
 </c:if>
 
-<br/>
 <c:if test="${AllDiets.size() > 0}">
 <div class="w3-container w3-center w3-margin-bottom w3-padding">
     <div class="w3-card-4">
@@ -237,7 +235,6 @@ ${user}, hello! User page
         <input type="hidden" name="command" value="set_current_user_diet" />
         <ul class=\"w3-ul\">
         <c:forEach var="a" items="${AllDiets}">
-
             ${a.dietType}
             <input type="radio" name="diet" value="${a.dietType}" checked />
             <br/>

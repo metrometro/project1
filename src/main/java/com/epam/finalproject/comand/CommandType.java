@@ -9,7 +9,7 @@ import com.epam.finalproject.comand.pagebutton.UserMainCommand;
 public enum CommandType {
     MARK_USERS_VISIT {
         {
-            this.command = new MarkUsersVisitCommand();
+            this.command = new TrainerMarkUsersVisitCommand();
         }
     },
     LOGIN {
@@ -49,242 +49,242 @@ public enum CommandType {
     },
     SHOW_ALL_EXERCISES {
         {
-            this.command = new ShowAllExercisesCommand();
+            this.command = new AdminShowAllExercisesCommand();
         }
     },
     SHOW_ALL_USERS {
         {
-            this.command = new ShowAllUsersCommand();
+            this.command = new AdminShowAllUsersCommand();
         }
     },
     SHOW_ALL_PAID_USERS_WITH_PERSONAL_TRAINER {
         {
-            this.command = new ShowAllPaidUsersWithPersonalTrainerCommand();
+            this.command = new TrainerShowAllPaidUsersWithPersonalTrainerCommand();
         }
     },
     BECOME_PERSONAL_TRAINER {
         {
-            this.command = new BecomePersonalTrainerCommand();
+            this.command = new TrainerBecomePersonalTrainerCommand();
         }
     },
     MARK_PERSONAL_USERS_VISIT {
         {
-            this.command = new MarkPersonalUsersVisitCommand();
+            this.command = new TrainerMarkPersonalUsersVisitCommand();
         }
     },
     SHOW_USER_DIET {
         {
-            this.command = new ShowUserDietCommand();
+            this.command = new TrainerShowUserDietCommand();
         }
     },
     SHOW_ALL_NOT_ACTIVE_USERS {
         {
-            this.command = new ShowAllNotActiveUsers();
+            this.command = new AdminShowAllNotActiveUsers();
         }
     },
     SHOW_ALL_TRAINERS {
         {
-            this.command = new ShowAllTrainersCommand();
+            this.command = new AdminShowAllTrainersCommand();
         }
     },
     SHOW_ALL_PAID_USERS {
         {
-            this.command = new ShowAllPaidUsersCommand();
+            this.command = new TrainerShowAllPaidUsersCommand();
         }
     },
     SHOW_ALL_USERS_WITHOUT_EXERCISES {
         {
-            this.command = new ShowAllUsersWithoutExercisesCommand();
+            this.command = new TrainerShowAllUsersWithoutExercisesCommand();
         }
     },
     SHOW_ALL_USERS_WITHOUT_DIET {
         {
-            this.command = new ShowAllUsersWithoutDietCommand();
+            this.command = new TrainerShowAllUsersWithoutDietCommand();
         }
     },
     DELETE_DIETS{
         {
-            this.command = new DeleteDietsCommand();
+            this.command = new AdminDeleteDietsCommand();
         }
     },
     DELETE_EXERCISES {
         {
-            this.command = new DeleteExercisesCommand();
+            this.command = new AdminDeleteExercisesCommand();
         }
     },
     DELETE_USER {
         {
-            this.command = new DeleteUserCommand();
+            this.command = new AdminDeleteUserCommand();
         }
     },
     DELETE_CURRENT_USER_DIET {
         {
-            this.command = new DeleteCurrentUserDietCommand();
+            this.command = new UserDeleteCurrentUserDietCommand();
         }
     },
     DELETE_CHOSEN_PERSONAL_EXERCISES {
         {
-            this.command = new DeleteChosenPersonalExercisesCommand();
+            this.command = new TrainerDeleteChosenPersonalExercisesCommand();
         }
     },
     DELETE_CHOSEN_PERSONAL_DIET {
         {
-            this.command = new DeleteChosenPersonalDietCommand();
+            this.command = new TrainerDeleteChosenPersonalDietCommand();
         }
     },
     DELETE_CURRENT_USER_EXERCISES {
         {
-            this.command = new DeleteCurrentUserExercisesCommand();
+            this.command = new UserDeleteCurrentUserExercisesCommand();
         }
     },
     PAYMENT_FORM {
         {
-            this.command = new PaymentFormCommand();
+            this.command = new UserPaymentFormCommand();
         }
     },
     WRITE_COMMENT {
         {
-            this.command = new WriteCommentCommand();
+            this.command = new UserWriteReviewCommand();
         }
     },
     CREATE_NEW_DIET{
         {
-            this.command = new CreateNewDietCommand();
+            this.command = new AdminCreateNewDietCommand();
         }
     },
     CREATE_NEW_EXERCISE {
         {
-            this.command = new CreateNewExercisesCommand();
+            this.command = new AdminCreateNewExercisesCommand();
         }
     },
     CREATE_COMMENT {
         {
-            this.command = new CreateCommentCommand();
+            this.command = new UserCreateReviewCommand();
         }
     },
     CHOOSE_CURRENT_USER_DIET {
         {
-            this.command = new ChooseCurrentUserDietCommand();
+            this.command = new UserChooseCurrentUserDietCommand();
         }
     },
     CHOOSE_CURRENT_USER_EXERCISES {
         {
-            this.command = new ChooseCurrentUserExercisesCommand();
+            this.command = new UserChooseCurrentUserExercisesCommand();
         }
     },
     CHOOSE_PAYMENT {
         {
-            this.command = new ChoosePaymentCommand();
+            this.command = new UserChoosePaymentCommand();
         }
     },
     CHOOSE_PERSONAL_EXERCISES {
         {
-            this.command = new ChoosePersonalExercisesCommand();
+            this.command = new TrainerChoosePersonalExercisesCommand();
         }
     },
     CHOOSE_PERSONAL_DIET {
         {
-            this.command = new ChoosePersonalDietCommand();
+            this.command = new TrainerChoosePersonalDietCommand();
         }
     },
     CHOOSE_PERSONAL_USERS_MARK {
         {
-            this.command = new ChoosePersonalUsersMarkCommand();
+            this.command = new TrainerChoosePersonalUsersMarkCommand();
         }
     },
     SET_CURRENT_USER_DIET {
         {
-            this.command = new SetCurrentUserDietCommand();
+            this.command = new UserSetCurrentUserDietCommand();
         }
     },
     SET_CURRENT_USER_EXERCISES {
         {
-            this.command = new SetCurrentUserExercisesCommand();
+            this.command = new UserSetCurrentUserExercisesCommand();
         }
     },
     SET_EXERCISES_FOR_USER {
         {
-            this.command = new SetExercisesForUserCommand();
+            this.command = new TrainerSetExercisesForUserCommand();
         }
     },
     SET_PERSONAL_EXERCISES {
         {
-            this.command = new SetPersonalExercisesCommand();
+            this.command = new TrainerSetPersonalExercisesCommand();
         }
     },
     SET_PERSONAL_DIET {
         {
-            this.command = new SetPersonalDietCommand();
+            this.command = new TrainerSetPersonalDietCommand();
         }
     },
     SET_DIET_FOR_USER {
         {
-            this.command = new SetDietForUserCommand();
+            this.command = new TrainerSetDietForUserCommand();
         }
     },
     CHOOSE_EXERCISES {
         {
-            this.command = new ChooseExercisesCommand();
+            this.command = new TrainerChooseExercisesCommand();
         }
     },
     CHOOSE_DIET {
         {
-            this.command = new ChooseDietCommand();
+            this.command = new TrainerChooseDietCommand();
         }
     },
     RESTORE_USER {
         {
-            this.command = new RestoreUserCommand();
+            this.command = new AdminRestoreUserCommand();
         }
     },
     MAKE_TRAINER {
         {
-            this.command = new MakeTrainerCommand();
+            this.command = new AdminMakeTrainerCommand();
         }
     },
     MAKE_USER {
         {
-            this.command = new MakeUserCommand();
+            this.command = new AdminMakeUserCommand();
         }
     },
     SHOW_ALL_DIETS{
         {
-            this.command = new ShowAllDietsCommand();
+            this.command = new AdminShowAllDietsCommand();
         }
     },
     SHOW_CURRENT_USER_STATE {
         {
-            this.command = new ShowCurrentUserStateCommand();
+            this.command = new UserShowCurrentUserStateCommand();
         }
     },
     SHOW_CURRENT_USER_COMMENTS {
         {
-            this.command = new ShowCurrentUserCommentsCommand();
+            this.command = new UserShowCurrentUserReviewsCommand();
         }
     },
     SHOW_EXERCISES_FOR_CURRENT_USER {
         {
-            this.command = new ShowExercisesForCurrentUserCommand();
+            this.command = new UserShowExercisesForCurrentUserCommand();
         }
     },
     SHOW_DIET_FOR_CURRENT_USER {
         {
-            this.command = new ShowDietForCurrentUserCommand();
+            this.command = new UserShowDietForCurrentUserCommand();
         }
     },
     SHOW_USER_EXERCISES {
         {
-            this.command = new ShowUserExercisesCommand();
+            this.command = new TrainerShowUserExercisesCommand();
         }
     },
     SHOW_ALL_TRAINERS_USERS {
         {
-            this.command = new ShowAllTrainersUsersCommand();
+            this.command = new TrainerShowAllTrainersUsersCommand();
         }
     },
     PAY {
         {
-            this.command = new PayCommand();
+            this.command = new UserPayCommand();
         }
     };
 

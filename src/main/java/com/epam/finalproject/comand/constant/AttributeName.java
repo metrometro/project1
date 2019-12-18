@@ -52,4 +52,6 @@ public class AttributeName {
     public final static String ERROR_PAYMENT = "errorPayment";
     public final static String CURRENT_TRAINER_USERS = "currentTrainerUsers";
     public final static String PERSONAL_USERS_FOR_MARK = "personalUsersForMark";
+    public final static String WITHOUT_TRAINER = "Without personal trainer";
+    public final static String PRICE_WITH_DISCOUNTS = "priceWithDiscount";
 }

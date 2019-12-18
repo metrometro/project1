@@ -13,6 +13,12 @@ public class PasswordEncoder {
     private final static String SHA_1 = "SHA-1";
     private final static String UTF_8 = "utf-8";
 
+    /**
+     * Method for encoding user password
+     * @param password - user password value
+     * @return text
+     */
+
     public static String encode(String password) {
         byte[] bytes = null;
 

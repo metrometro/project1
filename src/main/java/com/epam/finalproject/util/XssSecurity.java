@@ -4,8 +4,14 @@ public class XssSecurity {
 
     private final static String LEFT_TAG = "<";
     private final static String RIGHT_TAG = ">";
-    private final static String REPLACING_LEFT_TAG = "(lt)";
-    private final static String REPLACING_RIGHT_TAG = "(rt)";
+    private final static String REPLACING_LEFT_TAG = "&lt";
+    private final static String REPLACING_RIGHT_TAG = "&gt";
+
+    /**
+     * Xss hhh attack protection method
+     * @param text - text value
+     * @return encoded password
+     */
 
     public static String protectFromXssAttack(String text) {
         if (text == null || text.isEmpty()) {

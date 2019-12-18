@@ -18,7 +18,7 @@
 
 <h3>Welcome</h3>
 <hr/>
-${sessionScope.user}, <fmt:message key="label.welcome" />
+${sessionScope.user}, <fmt:message key="label.welcome"/>
 <hr/>
 
 
@@ -131,7 +131,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.createDiet"/></button>
                 </br>
                 </br>
-            </form><hr/>
+            </form>
         </div>
     </div>
 </c:if>
@@ -158,6 +158,15 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
 </c:if>
 
 <%--show all active users-----------------------------------------------------------------------------%>
+<c:if test="${users.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noUsers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${users.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -168,8 +177,8 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <div class="w3-container w3-center">
                     <div class="w3-bar w3-padding-large w3-padding-24">
                         <c:forEach var="a" items="${users}">
-                            <div class="w3-bar w3-padding-large w3-padding-24">
-                                    ${a.login}
+<%--                            <div class="w3-bar w3-padding-large w3-padding-24">--%>
+                                    <h4>${a.login}</h4>
                                 <form name="deleteCurrentUser" method="POST" action="controller">
                                     <input type="hidden" name="command" value="delete_user" />
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
@@ -180,7 +189,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                                     <input type="hidden" name="userLogin" value="${a.login}"/>
                                     <button type="submit" class="w3-btn w3-blue w3-round-large"><fmt:message key="label.makeTrainer"/></button>
                                 </form>
-                            </div>
+<%--                            </div>--%>
                             </br>
                         </c:forEach>
                     </div>
@@ -192,6 +201,15 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
 
 
 <%--show all deleted users------------------------------------------------------------------------------%>
+<c:if test="${allDeletedUsers.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noDeletedUsers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${allDeletedUsers.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -202,7 +220,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <div class="w3-container w3-center">
                     <div class="w3-bar w3-padding-large w3-padding-24">
                         <c:forEach var="a" items="${allDeletedUsers}">
-                            ${a.login}
+                            <h4>${a.login}</h4>
                             <form name="restoreUser" method="POST" action="controller">
                                 <input type="hidden" name="command" value="restore_user" />
                                 <input type="hidden" name="userLogin" value="${a.login}"/>
@@ -218,6 +236,16 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
 </c:if>
 
 <%--show all trainers----------------------------------------------------------------------------%>
+<c:if test="${trainers.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noTrainers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
+
 <c:if test="${trainers.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -228,7 +256,7 @@ ${sessionScope.user}, <fmt:message key="label.welcome" />
                 <div class="w3-container w3-center">
                     <div class="w3-bar w3-padding-large w3-padding-24">
                         <c:forEach var="a" items="${trainers}">
-                            ${a.login}
+                            <h4>${a.login}</h4>
                             <form name="restoreUser" method="POST" action="controller">
                                 <input type="hidden" name="command" value="make_user" />
                                 <input type="hidden" name="userLogin" value="${a.login}"/>

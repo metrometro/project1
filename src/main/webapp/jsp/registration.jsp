@@ -16,23 +16,23 @@
     </div>
 <form name="registrationForm" method="POST" class="w3-selection w3-light-grey w3-padding" action="controller">
     <input type="hidden" name="command" value="registration" />
-    <label>Login:<input type="text" name="login" class="w3-input w3-border w3-round-large" style="width: 30%" value="${login}" />
+    <label>Login:<input type="text" name="login" class="w3-input w3-border w3-round-large" style="width: 30%" value="${login}" required pattern="[a-zA-Z0-9]{5,20}"/>
         ${errorLoginAlreadyExists}
         ${errorLogin}
     </label>
-        <label>Password:<input type="password" name="password" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+        <label>Password:<input type="password" name="password" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[a-zA-Z0-9]{5,20}"/>
             ${errorPassword}
         </label>
-            <label>Repeat password:<input type="password" name="repeat password" class="w3-input w3-border w3-round-large" style="width: 30%" value="" />
+            <label>Repeat password:<input type="password" name="repeat password" class="w3-input w3-border w3-round-large" style="width: 30%" value="" required pattern="[a-zA-Z0-9]{5,20}"/>
                 ${errorRepeatPassword}
             </label>
-                <label>First name:<input type="text" name="first name" class="w3-input w3-border w3-round-large" style="width: 30%" value="${firstName}" required />
+                <label>First name:<input type="text" name="first name" class="w3-input w3-border w3-round-large" style="width: 30%" value="${firstName}" required pattern="[a-zA-Zа-яА-я]{1,20}"/>
     ${errorFirstName}
                 </label>
-    <label>Second name:<input type="text" name="last name" class="w3-input w3-border w3-round-large" style="width: 30%" value="${lastName}" />
+    <label>Second name:<input type="text" name="last name" class="w3-input w3-border w3-round-large" style="width: 30%" value="${lastName}" required pattern="[a-zA-Zа-яА-я]{1,20}"/>
     ${errorLastName}
     </label>
-    <label>e-mail:<input type="text" name="mail" class="w3-input w3-border w3-round-large" style="width: 30%" value="${mail}" />
+    <label>e-mail:<input type="text" name="mail" class="w3-input w3-border w3-round-large" style="width: 30%" value="${mail}" required pattern="\S{1,20}@gmail.com"/>
     ${errorEmail}
     </label>
     <br/>

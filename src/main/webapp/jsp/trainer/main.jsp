@@ -37,7 +37,18 @@ ${sessionScope.user}, hello! Trainer page
     </div>
 </div>
 
+
+
 <%--choose mark my users--%>
+<c:if test="${personalUsersForMark.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.youDontHaveYourUsers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${personalUsersForMark.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -61,6 +72,15 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--show all my users--%>
+<c:if test="${currentTrainerUsers.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noUsers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${currentTrainerUsers.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -72,7 +92,7 @@ ${sessionScope.user}, hello! Trainer page
                     <div class="w3-bar w3-padding-large w3-padding-24">
 
                         <c:forEach var="a" items="${currentTrainerUsers}">
-                            ${a.login}
+                            <h4>${a.login}</h4>
                             <%--show exercises for chosen user--%>
                             <form name="showUserExercises" method="POST" action="controller">
                                 <input type="hidden" name="command" value="show_user_exercises" />
@@ -234,6 +254,16 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--show all paid users with personal trainer--%>
+
+<c:if test="${usersWithPersonalTrainer.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noFreeUsersWithPersonalTrainer"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${usersWithPersonalTrainer.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -242,7 +272,7 @@ ${sessionScope.user}, hello! Trainer page
             </div>
             <ul class=\"w3-ul\">
                 <c:forEach var="a" items="${usersWithPersonalTrainer}">
-                    ${a.login}
+                    <h4>${a.login}</h4>
                     <form name="becomePersonalTrainer" method="POST" action="controller">
                         <input type="hidden" name="command" value="become_personal_trainer" />
                         <input type="hidden" name="userLogin" value="${a.login}" />
@@ -255,6 +285,16 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--show all paid users--%>
+
+<c:if test="${users.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noPaidUsers"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${users.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -278,6 +318,15 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--show all users withou exercises--%>
+<c:if test="${usersWithoutExercises.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noUsersWithoutExercises"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${usersWithoutExercises.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -288,7 +337,7 @@ ${sessionScope.user}, hello! Trainer page
                 <input type="hidden" name="command" value="choose_exercises" />
                 <ul class=\"w3-ul\">
                     <c:forEach var="a" items="${usersWithoutExercises}">
-                        ${a.login}
+                        <h4>${a.login}</h4>
                         <input type="hidden" name="currentUserLogin" value="${a.login}">
                         <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseExercises"/></button>
                         <br/>
@@ -301,6 +350,15 @@ ${sessionScope.user}, hello! Trainer page
 </c:if>
 
 <%--show all users withou diet--%>
+<c:if test="${usersWithoutDiet.size() == 0}">
+    <div class="w3-container w3-center w3-margin-bottom w3-padding">
+        <div class="w3-card-4">
+            <div class="w3-container w3-light-blue">
+                <h2><fmt:message key="label.noUsersWithoutDiet"/></h2>
+            </div>
+        </div>
+    </div>
+</c:if>
 <c:if test="${usersWithoutDiet.size() > 0}">
     <div class="w3-container w3-center w3-margin-bottom w3-padding">
         <div class="w3-card-4">
@@ -311,7 +369,7 @@ ${sessionScope.user}, hello! Trainer page
                 <input type="hidden" name="command" value="choose_diet" />
                 <ul class=\"w3-ul\">
                     <c:forEach var="a" items="${usersWithoutDiet}">
-                        ${a.login}
+                        <h>${a.login}</h>
                         <input type="hidden" name="currentUserLogin" value="${a.login}">
                         <button type="submit" class="w3-btn w3-blue w3-round-large "><fmt:message key="label.chooseDiet"/></button>
                         <br/>

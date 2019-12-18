@@ -14,6 +14,13 @@ public class DietService {
 
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     * Method for deleting  diet
+     * @param diets - diet array
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean deleteDiets(String[] diets) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
         if (diets == null) {
@@ -27,6 +34,13 @@ public class DietService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Method for creating diet
+     * @param dietType - diet
+     * @return boolean type
+     * @exception ServiceException
+     */
 
     public boolean createDiet(String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
@@ -45,6 +59,13 @@ public class DietService {
         }
     }
 
+    /**
+     * Method for deleting chosen diet
+     * @param userLogin - user login
+     * @param diet - diet array
+     * @return boolean type
+     * @exception ServiceException
+     */
 
     public boolean deleteChosenDiet(String userLogin, String[] diet) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
@@ -60,6 +81,14 @@ public class DietService {
         }
     }
 
+    /**
+     * Method for setting diet
+     * @param userLogin - user login
+     * @param dietType - diet
+     * @return boolean type
+     * @exception ServiceException
+     */
+
     public boolean setDiet(String userLogin, String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
         if (dietType == null || userLogin == null || dietType.isEmpty() || userLogin.isEmpty()) {
@@ -73,6 +102,14 @@ public class DietService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * Method for updating diet
+     * @param userLogin - user login
+     * @param dietType - diet
+     * @return boolean type
+     * @exception ServiceException
+     */
 
     public boolean updateOrder(String userLogin, String dietType) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
@@ -88,6 +125,13 @@ public class DietService {
         }
     }
 
+    /**
+     * Method for finding user diet
+     * @param userLogin - user login
+     * @return diet
+     * @exception ServiceException
+     */
+
     public List<Diet> findUserDiet(String userLogin) throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();
         List<Diet> diets = null;
@@ -99,6 +143,12 @@ public class DietService {
         }
         return diets;
     }
+
+    /**
+     * Method for finding all diets
+     * @return diet
+     * @exception ServiceException
+     */
 
     public List<Diet> findAllDiets() throws ServiceException {
         DietDao dietDaoImpl = DaoFactory.getInstance().getDietDao();

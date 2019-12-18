@@ -28,6 +28,7 @@ public class ActionFactory {
         } catch (IllegalArgumentException e) {
             logger.error(e);
             request.setAttribute(AttributeName.WRONG_ACTION, action + MessageManager.getProperty(MessageName.WRONG_ACTION));
+            command = new EmptyCommand();
         }
         return command;
     }
